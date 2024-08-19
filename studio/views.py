@@ -79,9 +79,12 @@ def studio_tickets(request):
 
     if request.user.is_authenticated:
         user_styles = set(request.user.studio_styles.values_list('id', flat=True))
-        following_user_ids = list(request.user.following_list.values_list('id', flat=True))
-        user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))
-        user_followers = list(request.user.followers.values_list('user_from_id', flat=True))
+        following_user_ids = list(request.user.following_list.values_list('id', flat=True)) # ids of users logged-in user is following
+        user_following_ids = list(request.user.following.values_list('user_to_id', flat=True)) # ids of users logged-in user is following (same)
+        user_followers = list(request.user.followers.values_list('user_from_id', flat=True)) # ids of users following the logged-in user
+        # oi following tou creator = followers tou logged-in
+
+        print('\n1 DEBUG 666 \n', user_followers, '\nDEBUG\n')
 
         # Filter tickets based on...
         filtered_tickets = [ticket for ticket in ticket_list if
