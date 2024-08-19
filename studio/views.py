@@ -95,7 +95,8 @@ def studio_tickets(request):
                             (ticket.stylist_type == 'everyone' or (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers)) # ...kalyptei o ticket creator na exei valei stylist == following
                             ]
 
-        print(f"\nDEBUG 777:\n ticket.creator_id={ticket.creator_id}, ticket.stylist_type={ticket.stylist_type}, user_followers={user_followers}")
+        for ticket in filtered_tickets:
+            print(f"\nDEBUG 777:\n ticket.creator_id={ticket.creator_id}, ticket.stylist_type={ticket.stylist_type}, user_followers={user_followers}")
 
         # Additional filtering based on studio_visibility
         if request.user.studio_visibility == 'following':
