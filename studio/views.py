@@ -90,7 +90,7 @@ def studio_tickets(request):
                             ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
                             ticket.style1.id in user_styles and # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
                             (ticket.stylist_type == 'everyone' or
-                                (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers)) # ...kalyptei o ticket creator na exei valei stylist == following
+                                (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_following_ids)) # ...kalyptei o ticket creator na exei valei stylist == following
                             ]
 
         # Additional filtering based on studio_visibility
@@ -102,8 +102,8 @@ def studio_tickets(request):
 
     else:
         following_user_ids = []
-        filtered_tickets = ticket_list  # Show all tickets for guestsa allakse to me to allo apo katw otan
-        # filtered_tickets = [ticket for ticket in ticket_list if ticket.stylist_type == 'everyone'] # deikse ola ektos apo afta pou exoun sygekrimeno following
+        # filtered_tickets = ticket_list  # Show all tickets for guestsa allakse to me to allo apo katw otan
+        filtered_tickets = [ticket for ticket in ticket_list if ticket.stylist_type == 'everyone'] # deikse ola ektos apo afta pou exoun sygekrimeno following
 
     # Create a paginator for the filtered tickets
     paginator = Paginator(filtered_tickets, 20)  # Show 20 tickets per page
