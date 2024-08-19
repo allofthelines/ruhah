@@ -75,6 +75,11 @@ def studio_tickets(request):
 def studio_tickets(request):
     ticket_list = Ticket.objects.filter(status='open', boxcuratedby='human_stylist')
 
+    # DEBUG GIA TO APO KATW DEBUG 1
+    for ticket in ticket_list.order_by('-id'):
+        print(
+            f"\nDEBUG Ticket:\n id={ticket.id}, creator={ticket.creator_id}, stylist_type={ticket.stylist_type}, status={ticket.status}")
+
     print('\n1 DEBUG 1 \n', list(ticket_list.order_by('-id')), '\nDEBUG\n')
 
     if request.user.is_authenticated:
