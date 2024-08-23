@@ -114,57 +114,42 @@
       }
 
       /* For mobile mode */
-      /* For mobile mode */
-    @media (max-width: 767px) {
+      @media (max-width: 767px) {
+
+        #landing-container {
+            width: 100%;
+        }
         .goodbye-decisions {
-            white-space: nowrap;
-            font-size: calc(4vw + 10px); /* Dynamically adjust font size */
-            max-width: 100%;
-            overflow: hidden;
-            display: block;
+          white-space: nowrap;
+          font-size: calc(4vw + 10px); /* Dynamically adjust font size */
+          max-width: 100%;
+          overflow: hidden;
+          display: block;
         }
 
         #contHELLO img {
-            content: url("{% static 'images/landing/polaroid1.png' %}");
+          content: url("{% static 'images/landing/polaroid1.png' %}");
         }
 
         #contHELLO p {
-            max-width: 500px;
-            margin: 0 auto;
+          max-width: 500px;
+          margin: 0 auto;
         }
 
-        /* Make contHOW and contFEELING full width on mobile */
         #contHOW, #contFEELING {
-            width: 100%; /* Full width of the mobile screen */
-            padding: 0 10px; /* Add a little padding for spacing */
+          display: block;
+          justify-content: center;
+          margin: 0 auto;
         }
 
-        /* Make the individual sections and their content wider */
         #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
-            width: 100%; /* Make them full width */
-            margin: 20px 0; /* Adjust margins for better spacing on mobile */
+          margin: 0 auto;
         }
 
-        /* Make images full width */
-        #contHOW1 img, #contHOW2 img, #contHOW3 img,
-        #contFEELING1 img, #contFEELING2 img {
-            width: 100%; /* Make the images full width */
-            height: auto; /* Maintain aspect ratio */
-        }
-
-        /* Adjust text width to take more space on mobile */
-        #contHOW1 p, #contHOW2 p, #contHOW3 p,
-        #contFEELING1 p, #contFEELING2 p {
-            width: 90%; /* Wider text blocks */
-            margin: 0 auto; /* Center them */
-        }
-
-        /* Additional margin for contFEELING2 to ensure proper spacing */
         #contFEELING2 {
             margin-top: 40px;
         }
-    }
-
+      }
     </style>
 
   {% endif %}
