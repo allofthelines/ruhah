@@ -88,14 +88,7 @@
     <!-- Inline CSS for desktop and mobile views -->
     <style>
 
-    .goodbye-decisions {
-    white-space: nowrap; /* Prevent text from breaking into two lines */
-    font-size: calc(5vw + 10px); /* Dynamically adjust font size based on viewport width */
-    max-width: 100%; /* Ensure the text does not overflow the container */
-    overflow: hidden; /* Prevent text overflow */
-    text-overflow: ellipsis; /* If needed, cut off the text gracefully */
-    display: block;
-    }
+
 
 
 
@@ -131,6 +124,16 @@
 
       /* For mobile mode */
       @media (max-width: 767px) {
+
+        .goodbye-decisions {
+            white-space: nowrap; /* Prevent text from breaking into two lines */
+            font-size: calc(5vw + 10px); /* Dynamically adjust font size based on viewport width */
+            max-width: 100%; /* Ensure the text does not overflow the container */
+            overflow: hidden; /* Prevent text overflow */
+            text-overflow: ellipsis; /* If needed, cut off the text gracefully */
+            display: block;
+        }
+
         #contHELLO img {
           content: url("{% static 'images/landing/polaroid1.png' %}");
         }
