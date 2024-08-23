@@ -88,12 +88,26 @@
     <!-- Inline CSS for desktop and mobile views -->
     <style>
 
+      /* Container for the three sections */
+        #contHOW {
+            display: flex;
+            flex-wrap: nowrap; /* Ensure no wrapping */
+            justify-content: space-around; /* Spread them evenly */
+            align-items: center;
+        }
+
       #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
+      }
+
+      #contHOW1, #contHOW2, #contHOW3 {
+        flex: 1 1 30%; /* Each takes up 30% of the container */
+        min-width: 300px; /* Minimum width to prevent them from collapsing */
+        /*margin: 20px; /* Add some space around each section */
       }
 
       /* For desktop mode */
