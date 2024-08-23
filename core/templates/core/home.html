@@ -89,21 +89,23 @@
     <style>
 
     .goodbye-decisions {
-    white-space: nowrap; /* Prevents text from wrapping to the next line */
-    overflow: hidden; /* Prevents overflow */
-    text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
-    font-size: 2vw; /* Makes the font-size responsive to viewport width */
-    max-width: 100%; /* Ensures the text scales within the container */
+    white-space: nowrap; /* Prevent text from breaking into two lines */
+    font-size: calc(5vw + 10px); /* Dynamically adjust font size based on viewport width */
+    max-width: 100%; /* Ensure the text does not overflow the container */
+    overflow: hidden; /* Prevent text overflow */
+    text-overflow: ellipsis; /* If needed, cut off the text gracefully */
+    display: block;
     }
 
 
-      /* Container for the three sections */
-        #contHOW {
-            display: flex;
-            flex-wrap: nowrap; /* Ensure no wrapping */
-            justify-content: space-around; /* Spread them evenly */
-            align-items: center;
-        }
+
+      #contHOW {
+    display: flex;
+    flex-wrap: nowrap; /* Ensure no wrapping */
+    justify-content: space-around; /* Spread them evenly */
+    align-items: flex-start; /* Align the items at the top */
+    margin-bottom: 50px;
+}
 
       #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
         display: flex;
