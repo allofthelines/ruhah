@@ -28,7 +28,7 @@
       <!-- contHELLO -->
       <div id="contHELLO" style="text-align: center; margin-bottom: 70px;">
         <img src="{% static 'images/landing/balenciaga1.jpg' %}" alt="Balenciaga Image" style="width: 100%;">
-        <h1>goodbye decisions</h1>
+        <h1 class="goodbye-decisions">goodbye decisions</h1>
         <h2>hello @maria</h2>
         <p style="font-size: 18px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fermentum, libero et suscipit condimentum, elit odio volutpat nisi, ac interdum neque nisl sit amet lorem. Morbi nec dolor quis odio.</p>
       </div>
@@ -41,7 +41,7 @@
         <!-- contHOW1 -->
         <div id="contHOW1" style="flex: 1; min-width: 300px; margin: 20px;">
           <h3>1. ASK FOR A FIT</h3>
-          <img src="{% static 'images/landing/ask1.jpeg' %}" alt="Outfit 1" style="width: 100%;">
+          <img src="{% static 'images/landing/ask1.png' %}" alt="Outfit 1" style="width: 100%;">
           <p>Describe your mood, the trend you're into, the occasion - anything that would help the stylist get it.</p>
         </div>
 
@@ -87,6 +87,15 @@
 
     <!-- Inline CSS for desktop and mobile views -->
     <style>
+
+    .goodbye-decisions {
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Prevents overflow */
+    text-overflow: ellipsis; /* Adds ellipsis if the text overflows */
+    font-size: 2vw; /* Makes the font-size responsive to viewport width */
+    max-width: 100%; /* Ensures the text scales within the container */
+    }
+
 
       /* Container for the three sections */
         #contHOW {
