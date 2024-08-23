@@ -37,8 +37,7 @@
       <h2 style="text-align: center; margin: 50px 0;">HOW IT WORKS</h2>
 
       <!-- contHOW -->
-      <div id="contHOW" style="display: flex; justify-content: space-between; margin-bottom: 50px; flex-wrap: wrap;">
-
+      <div id="contHOW" style="display: flex; justify-content: center; margin-bottom: 50px; flex-wrap: wrap;">
         <!-- contHOW1 -->
         <div id="contHOW1" style="flex: 1; min-width: 300px; margin: 20px;">
           <h3>1. ASK FOR A FIT</h3>
@@ -60,15 +59,13 @@
           <p>PINK GLASSES - $55</p>
           <p>...the clothes you like from the outfits recommended.</p>
         </div>
-
       </div>
 
       <!-- ARE YOU FEELING -->
       <h2 style="text-align: center; margin: 50px 0;">ARE YOU FEELING</h2>
 
       <!-- contFEELING -->
-      <div id="contFEELING" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-
+      <div id="contFEELING" style="display: flex; justify-content: center; flex-wrap: wrap;">
         <!-- contFEELING1 -->
         <div id="contFEELING1" style="flex: 1; min-width: 300px; margin: 20px;">
           <h3>CREATIVE?</h3>
@@ -84,7 +81,6 @@
           <img src="{% static 'images/landing/feeling2.png' %}" alt="Feeling 2" style="width: 100%;">
           <p>...follow and keep up with users and trending outfits for inspiration.</p>
         </div>
-
       </div>
 
     </div>
@@ -104,11 +100,13 @@
         #contHELLO img {
           content: url("{% static 'images/landing/polaroid1.png' %}");
         }
-        #contHOW {
+        #contHOW, #contFEELING {
           display: block;
+          justify-content: center;
+          margin: 0 auto;
         }
-        #contFEELING {
-          display: block;
+        #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
+          margin: 0 auto;
         }
       }
     </style>
