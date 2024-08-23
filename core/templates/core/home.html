@@ -1,6 +1,10 @@
 {% extends "core/base.html" %}
 {% load static %}
 
+{% block scripts %}
+  <script src="{% static "core/home.js" %}" defer></script>
+{% endblock %}
+
 {% block content %}
   {% if user.is_authenticated %}
     <!-- Display current page for logged-in users -->
