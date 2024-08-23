@@ -65,7 +65,7 @@
       <h2 style="text-align: center; margin: 50px 0;">ARE YOU FEELING</h2>
 
       <!-- contFEELING -->
-      <div id="contFEELING" style="display: flex; justify-content: center; flex-wrap: wrap;">
+      <div id="contFEELING">
         <!-- contFEELING1 -->
         <div id="contFEELING1" style="flex: 1; min-width: 300px; margin: 20px;">
           <h3>CREATIVE?</h3>
@@ -87,32 +87,31 @@
 
     <!-- Inline CSS for desktop and mobile views -->
     <style>
-
-
-
-
-
+      /* Align the items at the top in contHOW */
       #contHOW {
-    display: flex;
-    flex-wrap: nowrap; /* Ensure no wrapping */
-    justify-content: space-around; /* Spread them evenly */
-          justify-content: center;
-    align-items: flex-start; /* Align the items at the top */
-    margin-bottom: 50px;
-}
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-bottom: 50px;
+      }
 
+      /* Align the items at the top in contFEELING */
+      #contFEELING {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-bottom: 50px;
+      }
+
+      /* Align items in contHOW1, contHOW2, contHOW3, contFEELING1, contFEELING2 */
       #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-      }
-
-      #contHOW1, #contHOW2, #contHOW3 {
-        flex: 1 1 30%; /* Each takes up 30% of the container */
-        /*min-width: 300px; /* Minimum width to prevent them from collapsing */
-        /*margin: 20px; /* Add some space around each section */
       }
 
       /* For desktop mode */
@@ -125,28 +124,30 @@
 
       /* For mobile mode */
       @media (max-width: 767px) {
-
         .goodbye-decisions {
-            white-space: nowrap; /* Prevent text from breaking into two lines */
-            font-size: calc(5vw + 10px); /* Dynamically adjust font size based on viewport width */
-            max-width: 100%; /* Ensure the text does not overflow the container */
-            overflow: hidden; /* Prevent text overflow */
-            text-overflow: ellipsis; /* If needed, cut off the text gracefully */
-            display: block;
+          white-space: nowrap;
+          font-size: calc(5vw + 10px);
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
         }
 
         #contHELLO img {
           content: url("{% static 'images/landing/polaroid1.png' %}");
         }
-          #contHELLO p {
-            max-width: 500px; /* Limit the width to 500px on larger screens */
-            margin: 0 auto; /* Center the paragraph within its container */
+
+        #contHELLO p {
+          max-width: 500px;
+          margin: 0 auto;
         }
+
         #contHOW, #contFEELING {
           display: block;
           justify-content: center;
           margin: 0 auto;
         }
+
         #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
           margin: 0 auto;
         }
