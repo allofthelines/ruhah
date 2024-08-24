@@ -228,6 +228,15 @@ EMAIL_HOST_USER = 'fumioxyz1@gmail.com'
 EMAIL_HOST_PASSWORD = 'gcxtfsvznyycqowj'
 DEFAULT_FROM_EMAIL = 'fumioxyz1@gmail.com'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.privateemail.com'  # Namecheap's Private Email SMTP server
+EMAIL_PORT = 587  # Standard SMTP port for TLS
+EMAIL_USE_TLS = True  # Enable TLS for secure email transmission
+EMAIL_HOST_USER = 'contact@ruhah.com'  # Your business email address
+EMAIL_HOST_PASSWORD = 'cocococo00'  # The password for your Namecheap email account
+DEFAULT_FROM_EMAIL = 'RUHAH <contact@ruhah.com>'  # The sender name and email address
+
+
 # Ensure this is set to your production domain
 if os.getenv('DJANGO_ENV') == 'production':
     # AFTO STELNEI TA EMAIL GIA SIGNUP CONFIRMATION
