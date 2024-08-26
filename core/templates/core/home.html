@@ -37,6 +37,15 @@
         <p style="font-size: 18px; max-width: 600px; margin: 0 auto;">I always wanted to work in the fashion industry. Maybe a stylist for the magazines. Instead I’m an office assistant at a pharmaceutical company. Though I must say, I think the office looks better because of me. I’ve been handing out tips. Just kidding im a professional stylist, check out my ruhah xoxo. </p>
       </div>
 
+      <!-- WHAT IS SECTION -->
+        <h2 style="text-align: center; margin: 50px 0;">WHAT IS</h2>
+
+        <div id="contWHAT">
+          <div id="contWHAT-img">
+            <img src="{% static 'images/landing/asanser1.jpg' %}" alt="What is Image" style="width: 100%;">
+          </div>
+        </div>
+
       <!-- HOW IT WORKS -->
       <h2 style="text-align: center; margin: 50px 0;">HOW IT WORKS</h2>
 
@@ -109,6 +118,14 @@
         text-align: center;
       }
 
+      #contWHAT {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 50px auto;
+          width: 100%;
+        }
+
       h3 {
           font-size: 20px;
       }
@@ -125,6 +142,16 @@
           max-width: 2000px;
         }
       }
+
+      #contWHAT-img {
+    flex: 1 1 33.333%;
+    max-width: 33.333%;
+    margin: 0 auto;
+  }
+
+  #contWHAT-img img {
+    width: 100%;
+  }
 
       #contHOW {
         display: flex;
@@ -163,6 +190,14 @@
           max-width: 500px;
           margin: 0 auto;
         }
+
+        #contWHAT-img img {
+    width: 100%;
+    max-width: 95%; /* Adds the gaps to right and left */
+    margin: 0 auto;
+    display: block;
+  }
+}
 
         #contHOW, #contFEELING {
           display: block;
