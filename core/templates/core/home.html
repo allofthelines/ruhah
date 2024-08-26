@@ -75,7 +75,7 @@
       </div>
 
       <!-- ARE YOU FEELING -->
-      <h2 style="text-align: center; margin: 50px 0;">POV#2: YOU LIKE TELLING PEOPLE WHAT TO DO AND MONEY</h2>
+      <h2 style="text-align: center; margin: 50px 0;">POV#2: YOU LIKE<br><span id="dynamic-text-pov2">TELLING PEOPLE WHAT TO DO</span></h2>
 
       <!-- contFEELING -->
       <div id="contFEELING">
@@ -100,10 +100,11 @@
 
 
 
-
+      
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    // Script for POV: YOU ARE section (previous one)
     const textElement = document.getElementById("dynamic-text");
     const phrases = ["ARE STYLE-CURIOUS", "JUST CAN'T DECIDE", "WANT STYLING ADVICE", "DON'T HAVE THE TIME"];
     let currentPhraseIndex = 0;
@@ -111,6 +112,16 @@
     setInterval(function() {
       currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
       textElement.textContent = phrases[currentPhraseIndex];
+    }, 1000); // Change every 1 second
+
+    // Script for POV#2: YOU LIKE section (new one)
+    const textElementPOV2 = document.getElementById("dynamic-text-pov2");
+    const phrasesPOV2 = ["TELLING PEOPLE WHAT TO DO", "FASHION", "MONEY"];
+    let currentPhraseIndexPOV2 = 0;
+
+    setInterval(function() {
+      currentPhraseIndexPOV2 = (currentPhraseIndexPOV2 + 1) % phrasesPOV2.length;
+      textElementPOV2.textContent = phrasesPOV2[currentPhraseIndexPOV2];
     }, 1000); // Change every 1 second
   });
 </script>
