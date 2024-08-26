@@ -48,7 +48,7 @@
       </div>
 
       <!-- HOW IT WORKS -->
-      <h2 style="text-align: center; margin: 50px 0;">HOW IT WORKS</h2>
+      <h2 style="text-align: center; margin: 50px 0;">POV: YOU ARE STYLECURIOUS</h2>
 
       <!-- contHOW -->
       <div id="contHOW">
@@ -75,7 +75,8 @@
       </div>
 
       <!-- ARE YOU FEELING -->
-      <h2 style="text-align: center; margin: 50px 0;">ARE YOU</h2>
+      <h2 style="text-align: center; margin: 50px 0;">POV: YOU <span id="dynamic-text">ARE CURIOUS</span></h2>
+
 
       <!-- contFEELING -->
       <div id="contFEELING">
@@ -99,6 +100,22 @@
     </div>
 
 
+
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const textElement = document.getElementById("dynamic-text");
+    const phrases = ["ARE CURIOUS", "WANT ADVICE", "DON'T HAVE THE TIME", "JUST CAN'T DECIDE"];
+    let currentPhraseIndex = 0;
+
+    setInterval(function() {
+      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+      textElement.textContent = phrases[currentPhraseIndex];
+    }, 1000); // Change every 1 second
+  });
+</script>
 
 
 
