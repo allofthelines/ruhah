@@ -75,8 +75,7 @@
       </div>
 
       <!-- ARE YOU FEELING -->
-      <h2 style="text-align: center; margin: 50px 0;">POV#2: YOU LIKE<br><span id="dynamic-text-pov2">TELLING PEOPLE WHAT TO DO</span></h2>
-
+      <h2 style="text-align: center; margin: 50px 0;">POV#2: YOU LIKE<br><span id="dynamic-text-pov2-line1">TELLING PEOPLE</span><br><span id="dynamic-text-pov2-line2">WHAT TO DO</span><br></h2>
       <!-- contFEELING -->
       <div id="contFEELING">
         <!-- contFEELING1 -->
@@ -100,7 +99,7 @@
 
 
 
-
+      
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -115,13 +114,20 @@
     }, 1000); // Change every 1 second
 
     // Script for POV#2: YOU LIKE section (new one)
-    const textElementPOV2 = document.getElementById("dynamic-text-pov2");
-    const phrasesPOV2 = ["TELLING PEOPLE WHAT TO DO", "FASHION<br>", "MONEY<br>"];
+    const line1Element = document.getElementById("dynamic-text-pov2-line1");
+    const line2Element = document.getElementById("dynamic-text-pov2-line2");
+    const phrasesPOV2 = [
+      { line1: "TELLING PEOPLE", line2: "WHAT TO DO" },
+      { line1: "FASHION", line2: "\u00A0" }, // Non-breaking space for empty line with space
+      { line1: "MONEY", line2: "\u00A0" }    // Non-breaking space for empty line with space
+    ];
     let currentPhraseIndexPOV2 = 0;
 
     setInterval(function() {
+      const phrase = phrasesPOV2[currentPhraseIndexPOV2];
+      line1Element.textContent = phrase.line1;
+      line2Element.innerHTML = phrase.line2;
       currentPhraseIndexPOV2 = (currentPhraseIndexPOV2 + 1) % phrasesPOV2.length;
-      textElementPOV2.textContent = phrasesPOV2[currentPhraseIndexPOV2];
     }, 1000); // Change every 1 second
   });
 </script>
