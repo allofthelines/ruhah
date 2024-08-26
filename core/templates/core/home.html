@@ -41,6 +41,7 @@
       <h2 style="text-align: center; margin: 50px 0;">WHAT IS</h2>
 
       <div id="contWHAT">
+        <!-- Image container -->
         <div id="contWHAT-img">
           <img src="{% static 'images/landing/asanser1.jpg' %}" alt="What is Image" style="width: 100%;">
         </div>
@@ -97,6 +98,15 @@
 
     </div>
 
+
+
+
+
+
+
+
+
+
     <!-- Inline CSS for desktop and mobile views -->
     <style>
       /* Align the items at the top in contHOW and contFEELING */
@@ -127,35 +137,44 @@
           font-weight: 600;
       }
 
+
+
+
+
       /* For desktop mode */
       @media (min-width: 768px) {
+
         #landing-container {
           width: 80%;
           max-width: 2000px;
         }
+
+        #contWHAT-img {
+          flex: 1 1 33.333%;
+          max-width: 33.333%;
+          margin: 0 auto;
+        }
+
+          #contHOW {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between; /* Space between items */
+            align-items: flex-start;
+            gap: 20px; /* Add a gap between items to ensure no overlap */
+            margin: 0 auto 50px auto;
+            width: 100%;
+          }
+
+          #contHOW1, #contHOW2, #contHOW3 {
+            flex: 1 1 calc(33.333% - 20px); /* Equal width, accounting for the gap */
+            margin: 0; /* Remove the extra margin */
+          }
       }
 
-      @media (min-width: 768px) {
-      #contWHAT-img {
-        flex: 1 1 33.333%;
-        max-width: 33.333%;
-        margin: 0 auto;
-      }
 
-      #contHOW {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between; /* Space between items */
-        align-items: flex-start;
-        gap: 20px; /* Add a gap between items to ensure no overlap */
-        margin: 0 auto 50px auto;
-        width: 100%;
-    }
 
-    #contHOW1, #contHOW2, #contHOW3 {
-        flex: 1 1 calc(33.333% - 20px); /* Equal width, accounting for the gap */
-        margin: 0; /* Remove the extra margin */
-    }
+
+
 
       /* For mobile mode */
       @media (max-width: 767px) {
@@ -163,6 +182,7 @@
         #landing-container {
             width: 100%;
         }
+
         .goodbye-decisions  {
           white-space: nowrap;
           font-size: calc(4vw + 10px); /* Dynamically adjust font size */
