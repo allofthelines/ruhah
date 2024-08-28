@@ -220,38 +220,6 @@
 
 
 
-    document.addEventListener("DOMContentLoaded", function() {
-    // Script for POV: YOU ARE section (previous one)
-    const textElement = document.getElementById("dynamic-text");
-    const phrases = ["JUST CAN'T DECIDE", "WANT STYLING ADVICE", "DON'T HAVE THE TIME"];
-    let currentPhraseIndex = 0;
-
-    setInterval(function() {
-      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-      textElement.textContent = phrases[currentPhraseIndex];
-    }, 1000); // Change every 1 second
-
-    // Script for POV#2: YOU LIKE section (new one)
-    const line1Element = document.getElementById("dynamic-text-pov2-line1");
-    const line2Element = document.getElementById("dynamic-text-pov2-line2");
-    const phrasesPOV2 = [
-      { line1: "TELLING PEOPLE", line2: "WHAT TO DO" },
-      { line1: "FASHION", line2: "AND" }, // Non-breaking space for empty line with space line2: "\u00A0"
-      { line1: "MONEY", line2: "AND" }    // Non-breaking space for empty line with space line2: "\u00A0"
-    ];
-    let currentPhraseIndexPOV2 = 0;
-
-    setInterval(function() {
-      const phrase = phrasesPOV2[currentPhraseIndexPOV2];
-      line1Element.textContent = phrase.line1;
-      line2Element.innerHTML = phrase.line2;
-      currentPhraseIndexPOV2 = (currentPhraseIndexPOV2 + 1) % phrasesPOV2.length;
-    }, 1000); // Change every 1 second
-  });
-
-
-
-
 </script>
 
 
@@ -262,6 +230,11 @@
 
 
 <style>
+
+    p {
+        font-size: 18px;
+    }
+    
     #help-menu a {
         display: block;
         margin-bottom: 5px; /* Ensure each link is on its own line */
@@ -301,135 +274,6 @@
         }
     }
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style>
-      /* Align the items at the top in contHOW and contFEELING */
-      #contHOW, #contFEELING {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: flex-start;
-        margin: 0 auto 50px auto;
-        width: 100%;
-      }
-
-      /* Align items within individual containers */
-      #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-
-      h3 {
-          font-size: 20px;
-      }
-
-      #contHOW h3 {
-          margin-bottom: -2px;
-          font-weight: 600;
-      }
-
-
-
-
-
-      /* For desktop mode */
-      @media (min-width: 768px) {
-
-        #landing-container {
-          width: 100%;
-          max-width: 2000px;
-        }
-
-        #contWHAT-img {
-          flex: 1 1 40%;
-          max-width: 40%;
-          margin: 0 auto;
-        }
-
-          #contHOW {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: space-between; /* Space between items */
-            align-items: flex-start;
-            gap: 20px; /* Add a gap between items to ensure no overlap */
-            margin: 0 auto 50px auto;
-            width: 100%;
-          }
-
-          #contHOW1, #contHOW2, #contHOW3 {
-            flex: 1 1 calc(33.333% - 20px); /* Equal width, accounting for the gap */
-            margin: 0; /* Remove the extra margin */
-          }
-      }
-
-
-
-
-
-
-      /* For mobile mode */
-      @media (max-width: 767px) {
-
-        #landing-container {
-            width: 100%;
-        }
-
-        .goodbye-decisions  {
-          white-space: nowrap;
-          font-size: calc(4vw + 10px); /* Dynamically adjust font size */
-          max-width: 100%;
-          overflow: hidden;
-          display: block;
-        }
-
-        #contHELLO img {
-          content: url("{% static 'images/landing/polaroid1.jpg' %}");
-        }
-
-        #contHELLO p {
-          max-width: 500px;
-          margin: 0 auto;
-        }
-
-        #contHOW, #contFEELING {
-          display: block;
-          justify-content: center;
-          margin: 0 auto;
-        }
-
-        #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
-          margin: 0 auto;
-        }
-
-        #contFEELING2 {
-            margin-top: 40px;
-        }
-      }
-
-    </style>
-
-
-
-
 
 
 
