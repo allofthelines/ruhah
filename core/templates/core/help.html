@@ -347,22 +347,24 @@
 
 
     document.addEventListener("DOMContentLoaded", function () {
-    // Calculate the height of #landing-container-brut and set a margin-bottom dynamically
-    function adjustBrutContainerMargin() {
-        const brutContainer = document.getElementById('landing-container-brut');
-        if (brutContainer) {
-            const brutHeight = brutContainer.offsetHeight;
-            // Apply bottom margin to the container based on its height
-            brutContainer.style.marginBottom = `${brutHeight + 20}px`; // Adds some padding for spacing
+        // Calculate the height of #landing-container-brut and set a margin-bottom dynamically for #contWHAT
+        function adjustWhatContainerMargin() {
+            const brutContainer = document.getElementById('landing-container-brut');
+            const whatContainer = document.getElementById('contWHAT');
+            if (brutContainer && whatContainer) {
+                const brutHeight = brutContainer.offsetHeight;
+                // Apply bottom margin to #contWHAT based on #landing-container-brut's height
+                whatContainer.style.marginBottom = `${brutHeight + 20}px`; // Adds some padding for spacing
+            }
         }
-    }
 
-    // Adjust on load
-    adjustBrutContainerMargin();
+        // Adjust on load
+        adjustWhatContainerMargin();
 
-    // Adjust on window resize to keep it dynamic
-    window.addEventListener('resize', adjustBrutContainerMargin);
-});
+        // Adjust on window resize to keep it dynamic
+        window.addEventListener('resize', adjustWhatContainerMargin);
+    });
+
 
 
 </script>
