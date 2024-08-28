@@ -238,9 +238,9 @@
             we collaborate with. After each order the brand will email to you information regarding the
             tracking and expected shipping time.<br>
             <br>
-            <strong>Disclaimer</strong>: For items not shipped directly by our warehouse, we are not responsible for any lost or damaged packages.
+            <strong>Disclaimer</strong>: For packages not shipped by our warehouse, we are not responsible for any lost or damaged items.
             <br>We recommend contacting the brand or carrier directly for any delivery-related issues.
-            However, feel free to contact us for any unresolved issue or question, and we will do our best to find a solution.</p>
+            However, feel free to contact us for any unresolved issue or question and we will do our best to find a solution.</p>
         </div>
         <div id="returns" class="content-section" style="display: none;">
             <p><h3>Items not purchased</h3>
@@ -512,6 +512,33 @@
             margin-top: 40px;
         }
       }
+
+      @media (max-width: 767px) {
+        /* Override styles for mobile mode for content starting from POV#1 to contFEELING */
+        #overview h2, #contHOW, #contFEELING {
+            width: 90% !important; /* Force width to 90% */
+            margin: 0 auto !important; /* Center the content horizontally */
+        }
+
+        /* Align individual items within contHOW and contFEELING containers */
+        #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
+            width: 100% !important; /* Take full width inside the container */
+            margin: 10px auto !important; /* Center items and add margin for spacing */
+        }
+
+        /* Ensure images within these sections take the full width */
+        #contHOW img, #contFEELING img {
+            width: 100% !important; /* Force images to be responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        /* Adjust headings to ensure they fit nicely */
+        #contHOW h3, #contFEELING h3, #contFEELING h4 {
+            text-align: center; /* Center text */
+            width: 100%; /* Ensure headings span the width */
+        }
+}
+
     </style>
 
 
