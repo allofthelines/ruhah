@@ -514,30 +514,34 @@
       }
 
       @media (max-width: 767px) {
-        /* Override styles for mobile mode for content starting from POV#1 to contFEELING */
+        /* Target the sections starting from POV#1 to contFEELING */
         #overview h2, #contHOW, #contFEELING {
-            width: 90% !important; /* Force width to 90% */
-            margin: 0 auto !important; /* Center the content horizontally */
+            position: absolute; /* Position relative to the screen */
+            left: 50%; /* Center the content horizontally */
+            transform: translateX(-50%); /* Adjust centering */
+            width: 90% !important; /* Force width to 90% of the viewport */
+            margin: 0 !important; /* Remove any default margin */
+            z-index: 10; /* Ensure it overlaps other content */
         }
 
-        /* Align individual items within contHOW and contFEELING containers */
+        /* Ensure content within these sections remains readable and centered */
         #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
-            width: 100% !important; /* Take full width inside the container */
-            margin: 10px auto !important; /* Center items and add margin for spacing */
+            margin: 0 auto; /* Center items within the new absolute container */
+            text-align: center; /* Center-align text for readability */
         }
 
-        /* Ensure images within these sections take the full width */
+        /* Adjust images within these sections */
         #contHOW img, #contFEELING img {
-            width: 100% !important; /* Force images to be responsive */
+            width: 100%; /* Keep images responsive */
             height: auto; /* Maintain aspect ratio */
         }
 
-        /* Adjust headings to ensure they fit nicely */
+        /* Adjust headings for a better mobile display */
         #contHOW h3, #contFEELING h3, #contFEELING h4 {
-            text-align: center; /* Center text */
             width: 100%; /* Ensure headings span the width */
         }
-}
+    }
+
 
     </style>
 
