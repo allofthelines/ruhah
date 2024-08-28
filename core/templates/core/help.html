@@ -347,23 +347,27 @@
 
 
     document.addEventListener("DOMContentLoaded", function () {
-        // Calculate the height of #landing-container-brut and set a margin-bottom dynamically for #contWHAT
-        function adjustWhatContainerMargin() {
-            const brutContainer = document.getElementById('landing-container-brut');
-            const whatContainer = document.getElementById('contWHAT');
-            if (brutContainer && whatContainer) {
-                const brutHeight = brutContainer.offsetHeight;
-                // Apply bottom margin to #contWHAT based on #landing-container-brut's height
-                whatContainer.style.marginBottom = `${brutHeight + 20}px`; // Adds some padding for spacing
-            }
+    // Adjust the positioning of #landing-container-brut and set margin-bottom dynamically for #contWHAT
+    function adjustContainers() {
+        const brutContainer = document.getElementById('landing-container-brut');
+        const whatContainer = document.getElementById('contWHAT');
+
+        if (brutContainer && whatContainer) {
+            const whatContainerBottom = whatContainer.getBoundingClientRect().bottom + window.scrollY; // Get bottom position of #contWHAT relative to the document
+            brutContainer.style.top = `${whatContainerBottom + 20}px`; // Position #landing-container-brut right after #contWHAT with a small gap
+
+            const brutHeight = brutContainer.offsetHeight; // Calculate height of #landing-container-brut
+            whatContainer.style.marginBottom = `${brutHeight + 20}px`; // Set margin-bottom of #contWHAT based on #landing-container-brut's height
         }
+    }
 
-        // Adjust on load
-        adjustWhatContainerMargin();
+    // Adjust on load
+    adjustContainers();
 
-        // Adjust on window resize to keep it dynamic
-        window.addEventListener('resize', adjustWhatContainerMargin);
-    });
+    // Adjust on window resize to keep it dynamic
+    window.addEventListener('resize', adjustContainers);
+});
+
 
 
 
