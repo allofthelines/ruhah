@@ -47,6 +47,7 @@
                     </div>
                   </div>
 
+                  <div id="brut-wrapper" style="position: relative; width: 100%;">
                   <div id="landing-container-brut" style="width: 90%; max-width: 2000px; margin: -25px auto 0 auto;">
 
                   <!-- HOW IT WORKS -->
@@ -122,7 +123,9 @@
                     </div>
                   </div>
 
-                  </div> <!-- landing container center -->
+
+                  </div> <!-- brut wrapper center -->
+                  </div> <!-- brut landing container center -->
 
             </div>
 
@@ -345,32 +348,6 @@
 
 
 
-
-    document.addEventListener("DOMContentLoaded", function () {
-    // Adjust the positioning of #landing-container-brut and set margin-bottom dynamically for #contWHAT
-    function adjustContainers() {
-        const brutContainer = document.getElementById('landing-container-brut');
-        const whatContainer = document.getElementById('contWHAT');
-
-        if (brutContainer && whatContainer) {
-            const whatContainerBottom = whatContainer.getBoundingClientRect().bottom + window.scrollY; // Get bottom position of #contWHAT relative to the document
-            brutContainer.style.top = `${whatContainerBottom + 20}px`; // Position #landing-container-brut right after #contWHAT with a small gap
-
-            const brutHeight = brutContainer.offsetHeight; // Calculate height of #landing-container-brut
-            whatContainer.style.marginBottom = `${brutHeight + 20}px`; // Set margin-bottom of #contWHAT based on #landing-container-brut's height
-        }
-    }
-
-    // Adjust on load
-    adjustContainers();
-
-    // Adjust on window resize to keep it dynamic
-    window.addEventListener('resize', adjustContainers);
-});
-
-
-
-
 </script>
 
 
@@ -548,6 +525,12 @@
 
 
       @media (max-width: 767px) {
+
+          #brut-wrapper {
+        position: relative;
+        width: 100%;
+        margin-bottom: 20px; /* Adjust for footer spacing */
+    }
           /* Target the sections starting from POV#1 to contFEELING */
           #landing-container-brut {
               position: absolute; /* Position relative to the screen */
