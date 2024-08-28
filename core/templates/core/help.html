@@ -8,24 +8,144 @@
 
 <div id="help-menu-content" style="display: flex; width: 100%; margin-top: -10px;">
     <!-- Navigation Menu -->
-    <div id="help-menu" style="width: 15%;">
-        <a href="#" onclick="showContent('box', 'Help > Box')">Box</a>
-        <a href="#" onclick="showContent('studio', 'Help > Studio')">Studio</a>
+    <div id="help-menu" style="width: 15%; font-family: 'Poppins', sans-serif;">
+        <a href="#" onclick="showContent('overview', 'Help > Overview')">OVERVIEW</a>
+        <a href="#" onclick="showContent('ask', 'Help > Ask')">ASKS</a>
+        <a href="#" onclick="showContent('studio', 'Help > Studio')">STUDIO</a>
         <br>
-        <a href="#" onclick="showContent('stylists', 'Help > Stylists')">Stylists</a>
+        <a href="#" onclick="showContent('stylists', 'Help > Stylists')">STYLISTS</a>
         <br>
-        <a href="#" onclick="showContent('delivery', 'Help > Delivery')">Delivery</a>
-        <a href="#" onclick="showContent('returns', 'Help > Returns')">Returns</a>
+        <a href="#" onclick="showContent('delivery', 'Help > Delivery')">DELIVERY</a>
+        <a href="#" onclick="showContent('returns', 'Help > Returns')">RETURNS</a>
         <br>
         <!-- <a href="#" onclick="showContent('careers', 'Help > Careers')>Careers</a> -->
-        <a href="#" onclick="showContent('locations', 'Help > Locations')">Locations</a>
-        <a href="#" onclick="showContent('contact', 'Help > Contact')">Contact</a>
+        <a href="#" onclick="showContent('contact', 'Help > Contact')">CONTACT</a>
     </div>
 
     <!-- Content Area -->
     <div id="content" style="width: 70%%; padding-left: 5px; margin-top: -16px;">
         <div id="help" class="content-section active" style="display: block;">
             <p>Welcome. Please choose the section you need assistance with.<br><br>
+        </div>
+
+
+
+
+        <div id="overview" class="content-section" style="display: block;">
+
+            <div id="landing-container" style="width: 90%; max-width: 2000px; margin: -25px auto 0 auto;">
+
+                  <!-- WHAT IS SECTION -->
+                  <h2 style="text-align: center; margin: 50px 0px 78px 0px;">AT RUHAH YOU CAN</h2>
+
+                  <div id="contWHAT">
+                    <!-- Image container -->
+                    <div id="contWHAT-img">
+                      <img src="{% static 'images/landing/asanser1.jpg' %}" alt="What is Image" style="width: 100%;">
+                    </div>
+                  </div>
+
+                  <!-- HOW IT WORKS -->
+                  <h2 style="text-align: center; margin: 70px 0 40px 0;">POV#1: YOU<br><span id="dynamic-text">ARE CURIOUS</span><br>SO YOU</h2>
+
+                  <!-- contHOW -->
+                  <div id="contHOW">
+                    <!-- contHOW1 -->
+                    <div id="contHOW1" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+                      <h3>1. ASK FOR A FIT</h3>
+                      <img src="{% static 'images/landing/ask1.jpg' %}" alt="Outfit 1" style="width: 100%;">
+                      <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">describing your mood, the trend you're into, the occasion - anything that would help the stylist get it.</p>
+                    </div>
+
+                    <!-- contHOW2 -->
+                    <div id="contHOW2" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+                      <h3>2. GET A FIT</h3>
+                      <img src="{% static 'images/landing/outfit1.jpeg' %}" alt="Outfit 1" style="width: 100%;">
+                      <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">curated by our users and (human) stylists tailor-made for your ask.</p>
+                    </div>
+
+                    <!-- contHOW3 -->
+                    <div id="contHOW3" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+                      <h3>3. PURCHASE</h3>
+                      <img src="{% static 'images/landing/item1.jpg' %}" alt="Item 1" style="width: 100%;">
+                      <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">the clothes you like from the outfits recommended.</p>
+                    </div>
+                  </div>
+
+                  <!-- ARE YOU FEELING -->
+                  <h2 style="text-align: center; margin: 70px 0 50px 0;">POV#2: YOU LIKE<br><span id="dynamic-text-pov2-line1">TELLING PEOPLE</span><br><span id="dynamic-text-pov2-line2">WHAT TO DO AND</span><br></h2>
+
+                  <div id="contHOW">
+                    <!-- contHOW1 -->
+                    <div id="contHOW1" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+                      <h3>1. VISIT THE STUDIO</h3>
+                      <img src="{% static 'images/landing/studio-asks1.jpg' %}" alt="Outfit 1" style="width: 100%;">
+                      <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">browse other user's active asks and choose the one(s) you want to style.</p>
+                    </div>
+
+                    <!-- contHOW2 -->
+                    <div id="contHOW2" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+                      <h3>2. CREATE AN OUTFIT</h3>
+                      <img src="{% static 'images/landing/studio-create1.jpg' %}" alt="Outfit 1" style="width: 100%;">
+                      <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">by browsing out catalogue and choosing the clothes or accessories that best fit your vision.</p>
+                    </div>
+
+                    <!-- contHOW3 -->
+                    <div id="contHOW3" style="flex: 1; margin: 20px; margin-right: -10px; margin-left: -10px;">
+                      <h3>3. EARN 10%</h3>
+                      <img src="{% static 'images/landing/studio-submit1.jpg' %}" alt="Item 1" style="width: 100%;">
+                      <p style="font-size: 18px; width: 80%; text-align: center; margin: 0 auto;">commission for every item the user chooses to purchase from that outfit.</p>
+                    </div>
+                  </div>
+
+
+                  <!-- contFEELING -->
+                  <div id="contFEELING" style="display: none;">
+                    <!-- contFEELING1 -->
+                    <div id="contFEELING1" style="flex: 1;">
+                      <h3>FEELING CREATIVE?</h3>
+                      <h4 style="font-family: Orbitron; font-weight: 500; font-style: normal; font-size: 25px; margin-top: -18px;">STYLE AND EARN</h4>
+                      <img src="{% static 'images/landing/feeling1.png' %}" alt="Feeling 1" style="width: 100%; margin-top: -25px;">
+                      <p style="font-size: 18px; width: 80%; text-align: center; margin-top: 20;">money by creating outfits for others in the studio.</p>
+                    </div>
+
+                    <!-- contFEELING2 -->
+                    <div id="contFEELING2" style="flex: 1;">
+                      <h3>FEELING ADVENTUROUS?</h3>
+                      <h4 style="font-family: Orbitron; font-weight: 500; font-style: normal; font-size: 25px; margin-top: -18px;">EXPLORE</h4>
+                      <img src="{% static 'images/landing/feeling2.png' %}" alt="Feeling 2" style="width: 100%; margin-top: -25px;">
+                      <p style="font-size: 18px; width: 80%; text-align: center; margin-top: 20;">follow and keep up with users and trending outfits for inspiration.</p>
+                    </div>
+                  </div>
+
+            </div>
+
+        </div>
+
+
+
+
+        <div id="ask" class="content-section" style="display: block;">
+            <p>
+            <h3>What is an Ask?</h3>
+            A form with which you request an outfit. You describe whatever you have in mind that would help
+            the user or stylist create the outfit just for you and your need.
+            <h3>What should i write in the Ask stylist notes?</h3>
+            Here are a few examples.
+            <h3>Can i buy the items inside the outfit?</h3>
+            Yes, all the items in an outfit are available for purchase.
+            <h3>Do i have to buy something in it?</h3>
+            No. You can just use the outfit as an inspiration.
+            <h3>Who creates the outfits for Ask?</h3>
+            Other Ruhah users. That could be regular users or professional stylists.
+            You have the option of only making it visible for accounts you follow. You can also
+            create a private ask, so to only one specific account.
+            <h3>How are the outfits selected?</h3>
+            For each ask, multiple different users create and submit their own outfit idea for your ask.
+            Then our algorithm selects one of them, which is the one you see.
+            <h3>Can i create and submit an outfit for another user's Ask?</h3>
+            Yes, in the studio. Visit the Studio help section for more info on how it works.
+            </p>
         </div>
 
         <div id="box" class="content-section" style="display: none;">
@@ -50,6 +170,7 @@
             <h3>Is it a subscription service?</h3>
             No. You only pay each time you order a Box.</p>
         </div>
+
         <div id="studio" class="content-section" style="display: none;">
             <p><h3>What is the Ruhah Studio?</h3>
                 Ruhah Studio is a platform where Stylists can view and respond to outfit requests from users.
@@ -76,26 +197,33 @@
         <div id="stylists" class="content-section" style="display: none;">
             <p>
                 <h3>Who is a Ruhah Stylist?</h3>
-                A registered user who creates an outfit as a response to a customer request.
+                A registered user who creates an outfit as a response to another user's Ask request.
+                Some users in Ruhah are professional stylists, others hobbyists, others mainly
+                prefer Asking and connecting with other people, for the sake of simplicity we
+                refer to people that make outfit suggestions as stylists.
                 Stylists make the suggestions, we handle everything else.
                 As a Stylist, you can sign up and start styling right away in the Ruhah Studio.
-                <h3>What happens if a customer buys my outfit?</h3>
-                For each user request, up to 10 stylists recommend one or more outfits each.
-                Each time your outfit is delivered to the customer and the customer chooses to buy
-                items you recommended you get notified and earn credits.
-                These credits can be cashed out whenever you want.
+                <h3>What happens if a customer buys an item from an outfit i created?</h3>
+                For each user request, up to 10 users recommend an outfit each.
+                Each time the user that created an ask buys an item from an outfit you created,
+                you earn a percentage of the price of the item. That percentage changes depending on
+                the occasion but the range is from 15-30%.
                 <h3>What happens if they don't?</h3>
                 Nothing.
-                <h3>How can I cash out my earned credits?</h3>
-                Visit your Stylist Profile page and follow the instructions provided there.
+                <h3>Is there any other way to earn money?</h3>
+                Yes. Every time you create an outfit for an ask it appears in your profile grid.
+                Users can double click and like your grid outfits. When they do that the clothes of that outfit
+                are saved in their likes section. In their likes section they can generate fits and buy
+                the clothes from these fits. You get 10% for every timem they buy that was liked from your
+                profile grid.
                 <h3>Is it really that simple?</h3>
-                Yes. Sign up, start styling, and earn credits for your chosen outfits.
+                Yes. You sign up, start styling, and earn money each time your items are bought.
 
             </p>
         </div>
 
         <div id="delivery" class="content-section" style="display: none;">
-            <p>We currently only deliver to London.<br>
+            <p>We currently only deliver to the UK.<br>
                 <ul>
                     <li>Standard Delivery: 2-4 working days.</li>
                     <li>Free Box delivery for all orders.</li>
@@ -140,12 +268,9 @@
             If you appreciate what we do, enjoy trying new things, and love solving problems,
             feel free to drop us an email. We would be happy to hear from you.</p>
         </div>
-        <div id="locations" class="content-section" style="display: none;">
-            <p>Mannequin House, 5 Blackhorse Ln, E17 6SX, London, United Kingdom<br><br>
-                Spetson 126, 11363, Athens, Greece
-        </div>
+
         <div id="contact" class="content-section" style="display: none;">
-            <p>Customer care: support@ruhah.com<br><br>All other enquiries: contact@ruhah.com</p>
+            <p>Customer care and any other enquiries:<br><br>contact@ruhah.com</p>
         </div>
     </div>
 
@@ -153,7 +278,16 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
 <script>
+
+
     function showContent(sectionId, headerText) {
         var sections = document.querySelectorAll('.content-section');
         sections.forEach(function(section) {
@@ -162,7 +296,50 @@
         document.getElementById(sectionId).style.display = 'block';
         document.getElementById('page-header').textContent = headerText;
     }
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+    // Script for POV: YOU ARE section (previous one)
+    const textElement = document.getElementById("dynamic-text");
+    const phrases = ["JUST CAN'T DECIDE", "WANT STYLING ADVICE", "DON'T HAVE THE TIME"];
+    let currentPhraseIndex = 0;
+
+    setInterval(function() {
+      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+      textElement.textContent = phrases[currentPhraseIndex];
+    }, 1000); // Change every 1 second
+
+    // Script for POV#2: YOU LIKE section (new one)
+    const line1Element = document.getElementById("dynamic-text-pov2-line1");
+    const line2Element = document.getElementById("dynamic-text-pov2-line2");
+    const phrasesPOV2 = [
+      { line1: "TELLING PEOPLE", line2: "WHAT TO DO AND" },
+      { line1: "FASHION", line2: "AND" }, // Non-breaking space for empty line with space line2: "\u00A0"
+      { line1: "MONEY", line2: "AND" }    // Non-breaking space for empty line with space line2: "\u00A0"
+    ];
+    let currentPhraseIndexPOV2 = 0;
+
+    setInterval(function() {
+      const phrase = phrasesPOV2[currentPhraseIndexPOV2];
+      line1Element.textContent = phrase.line1;
+      line2Element.innerHTML = phrase.line2;
+      currentPhraseIndexPOV2 = (currentPhraseIndexPOV2 + 1) % phrasesPOV2.length;
+    }, 1000); // Change every 1 second
+  });
+
+
+
 </script>
+
+
+
+
+
+
+
 
 <style>
     #help-menu a {
@@ -204,5 +381,137 @@
         }
     }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+      /* Align the items at the top in contHOW and contFEELING */
+      #contHOW, #contFEELING {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        margin: 0 auto 50px auto;
+        width: 100%;
+      }
+
+      /* Align items within individual containers */
+      #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      h3 {
+          font-size: 20px;
+      }
+
+      #contHOW h3 {
+          margin-bottom: -2px;
+          font-weight: 600;
+      }
+
+
+
+
+
+      /* For desktop mode */
+      @media (min-width: 768px) {
+
+        #landing-container {
+          width: 80%;
+          max-width: 2000px;
+        }
+
+        #contWHAT-img {
+          flex: 1 1 40%;
+          max-width: 40%;
+          margin: 0 auto;
+        }
+
+          #contHOW {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between; /* Space between items */
+            align-items: flex-start;
+            gap: 20px; /* Add a gap between items to ensure no overlap */
+            margin: 0 auto 50px auto;
+            width: 100%;
+          }
+
+          #contHOW1, #contHOW2, #contHOW3 {
+            flex: 1 1 calc(33.333% - 20px); /* Equal width, accounting for the gap */
+            margin: 0; /* Remove the extra margin */
+          }
+      }
+
+
+
+
+
+
+      /* For mobile mode */
+      @media (max-width: 767px) {
+
+        #landing-container {
+            width: 100%;
+        }
+
+        .goodbye-decisions  {
+          white-space: nowrap;
+          font-size: calc(4vw + 10px); /* Dynamically adjust font size */
+          max-width: 100%;
+          overflow: hidden;
+          display: block;
+        }
+
+        #contHELLO img {
+          content: url("{% static 'images/landing/polaroid1.jpg' %}");
+        }
+
+        #contHELLO p {
+          max-width: 500px;
+          margin: 0 auto;
+        }
+
+        #contHOW, #contFEELING {
+          display: block;
+          justify-content: center;
+          margin: 0 auto;
+        }
+
+        #contHOW1, #contHOW2, #contHOW3, #contFEELING1, #contFEELING2 {
+          margin: 0 auto;
+        }
+
+        #contFEELING2 {
+            margin-top: 40px;
+        }
+      }
+    </style>
+
+
+
+
+
+
+
+
 
 {% endblock %}
