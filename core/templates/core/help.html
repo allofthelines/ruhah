@@ -11,7 +11,7 @@
 <div id="help-menu-content" style="display: flex; width: 100%; margin-top: -10px;">
     <!-- Navigation Menu -->
     <div id="help-menu" style="width: 15%; font-family: 'Poppins', sans-serif;">
-        <a href="#" onclick="showContent('overview', 'Help > Overview')">READ ME</a>
+        <a href="#" onclick="showContent('general', 'Help > General')">GENERAL</a>
         <a href="#" onclick="showContent('ask', 'Help > Asks')">ASKS</a>
         <a href="#" onclick="showContent('studio', 'Help > Studio')">STUDIO</a>
         <br>
@@ -33,7 +33,7 @@
 
 
 
-        <div id="overview" class="content-section" style="display: none;">
+        <div id="general" class="content-section" style="display: none;">
 
             <div id="landing-container" style="width: 90%; max-width: 2000px; margin: -25px auto 0 auto;">
 
@@ -527,8 +527,6 @@
               left: 50%; /* Center the content horizontally */
               transform: translateX(-50%); /* Adjust centering */
               width: 90% !important; /* Force width to 90% of the viewport */
-              height: auto; /* Allow height to grow with content */
-              bottom: 0; /* Ensure it doesn't overlap with the footer */
           }
       }
 
