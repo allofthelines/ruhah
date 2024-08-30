@@ -7,11 +7,10 @@ class Command(BaseCommand):
     help = 'Update item name and price based on Shopify product data'
 
     def handle(self, *args, **kwargs):
-        # Filter items that are connected to a Shopify store and have relevant categories
+        # Filter items that are connected to a Shopify store, no longer restricted by category
         items = Item.objects.filter(
             ecommerce_store__platform='shopify',  # Django ORM field for related table lookup
-            ecommerce_product_id__isnull=False,
-            cat__in=['dress', 'top', 'bottom', 'accessory']
+            ecommerce_product_id__isnull=False
         )
 
         # Print the number of items found
