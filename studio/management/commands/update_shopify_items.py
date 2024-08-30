@@ -9,7 +9,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # Filter items that are connected to a Shopify store and have relevant categories
         items = Item.objects.filter(
-            ecommerce_store__platform='shopify',
+            ecommerce_store__platform='shopify',  # Django ORM field for related table lookup
             ecommerce_product_id__isnull=False,
             cat__in=['dress', 'top', 'bottom', 'accessory']
         )
@@ -52,6 +52,7 @@ class Command(BaseCommand):
                 item.name = product.title
                 print(f"Product title from Shopify: {product.title}")
 
+                # Find the highest price among variants
                 max_price = max(float(variant.price) for variant in product.variants)
                 print(f"Highest variant price from Shopify: {max_price}")
 
