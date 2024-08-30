@@ -3,21 +3,21 @@
         "temp_upload_id": "1",
         "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "",
+        "modality": "physical",
         "name": "",
         "image": "items/xxxxxxxx.png",
-        "cat": "",
-        "tags": ""
+        "cat": "dress",
+        "tags": "fumio"
     },
     {
         "temp_upload_id": "2",
         "itemid": "",
         "ecommerce_product_id": "",
-        "modality": "",
+        "modality": "physical",
         "name": "",
         "image": "items/xxxxxxxx.png",
-        "cat": "",
-        "tags": ""
+        "cat": "footwear",
+        "tags": "fumio"
     },
     {
         "temp_upload_id": "3",
