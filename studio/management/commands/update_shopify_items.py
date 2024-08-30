@@ -1,16 +1,18 @@
 import os
 from django.core.management.base import BaseCommand
 import shopify
+import requests
 from studio.models import Item, EcommerceStore
 
+
 class Command(BaseCommand):
-    help = 'Update item name and price based on Shopify product data'
+    help = 'Update item name and price based on Shopify or WooCommerce product data'
 
     def handle(self, *args, **kwargs):
-        # Filter items that are connected to a Shopify store, no longer restricted by category
+        # Filter items that are connected to an eCommerce store
         items = Item.objects.filter(
-            ecommerce_store__platform='shopify',  # Django ORM field for related table lookup
-            ecommerce_product_id__isnull=False
+            ecommerce_store__isnull=False,  # Ensure there is an associated ecommerce store
+            ecommerce_product_id__isnull=False  # Only items with a product ID
         )
 
         # Print the number of items found
@@ -24,41 +26,92 @@ class Command(BaseCommand):
             ecommerce_store = item.ecommerce_store
             print(f"Processing Item ID: {item.id} - {item.name}")
 
-            # Get Shopify credentials
-            api_key = ecommerce_store.api_key
-            api_secret = ecommerce_store.api_secret
-            api_access_token = ecommerce_store.api_access_token
-            shop_url = f"https://{ecommerce_store.shop_url}/admin"
+            # Determine the platform and process accordingly
+            if ecommerce_store.platform.lower() == 'shopify':
+                self.process_shopify_item(item, ecommerce_store)
+            elif ecommerce_store.platform.lower() == 'woocommerce':
+                self.process_woocommerce_item(item, ecommerce_store)
+            else:
+                print(f"Unknown platform for Item ID: {item.id} - {ecommerce_store.platform}")
 
-            # Print Shopify credentials (masked for security)
-            print(f"Connecting to Shopify store: {shop_url}")
+    def process_shopify_item(self, item, ecommerce_store):
+        # Get Shopify credentials
+        api_key = ecommerce_store.api_key
+        api_secret = ecommerce_store.api_secret
+        api_access_token = ecommerce_store.api_access_token
+        shop_url = f"https://{ecommerce_store.shop_url}/admin"
 
-            # Connect to Shopify
-            shopify.ShopifyResource.set_site(shop_url)
-            session = shopify.Session(shop_url, version="2023-04", token=api_access_token)
-            shopify.ShopifyResource.activate_session(session)
+        # Print Shopify credentials (masked for security)
+        print(f"Connecting to Shopify store: {shop_url}")
 
-            try:
-                # Fetch product from Shopify
-                print(f"Fetching product {item.ecommerce_product_id} for Item ID: {item.id}")
-                product = shopify.Product.find(item.ecommerce_product_id)
+        # Connect to Shopify
+        shopify.ShopifyResource.set_site(shop_url)
+        session = shopify.Session(shop_url, version="2023-04", token=api_access_token)
+        shopify.ShopifyResource.activate_session(session)
 
-                if not product:
-                    print(f"No product found for Item ID: {item.id}")
-                    continue
+        try:
+            # Fetch product from Shopify
+            print(f"Fetching product {item.ecommerce_product_id} for Item ID: {item.id}")
+            product = shopify.Product.find(item.ecommerce_product_id)
 
-                # Update item name and price
-                item.name = product.title
-                print(f"Product title from Shopify: {product.title}")
+            if not product:
+                print(f"No product found for Item ID: {item.id}")
+                return
 
-                # Find the highest price among variants
-                max_price = max(float(variant.price) for variant in product.variants)
-                print(f"Highest variant price from Shopify: {max_price}")
+            # Update item name and price
+            item.name = product.title
+            print(f"Product title from Shopify: {product.title}")
 
-                item.price = max_price
-                item.save()
+            # Find the highest price among variants
+            max_price = max(float(variant.price) for variant in product.variants)
+            print(f"Highest variant price from Shopify: {max_price}")
 
-                print(f"Updated Item ID: {item.id} - Name: {item.name}, Price: {item.price}")
+            item.price = max_price
+            item.save()
 
-            except Exception as e:
-                print(f"Error updating item {item.id}: {e}")
+            print(f"Updated Item ID: {item.id} - Name: {item.name}, Price: {item.price}")
+
+        except Exception as e:
+            print(f"Error updating item {item.id}: {e}")
+
+    def process_woocommerce_item(self, item, ecommerce_store):
+        # Get WooCommerce credentials
+        consumer_key = ecommerce_store.api_key
+        consumer_secret = ecommerce_store.api_secret
+        store_url = ecommerce_store.shop_url
+
+        # WooCommerce API endpoint to fetch product data
+        product_url = f"https://{store_url}/wp-json/wc/v3/products/{item.ecommerce_product_id}"
+
+        print(f"Connecting to WooCommerce store: {store_url}")
+
+        try:
+            # Make a GET request to fetch the product data
+            response = requests.get(product_url, auth=(consumer_key, consumer_secret))
+
+            # If response is not successful, raise an exception
+            if response.status_code != 200:
+                print(f"Failed to fetch product {item.ecommerce_product_id}: {response.text}")
+                return
+
+            product = response.json()
+
+            # Update item name and price
+            item.name = product['name']
+            print(f"Product title from WooCommerce: {product['name']}")
+
+            # Find the highest price among variations (if available)
+            if 'variations' in product:
+                max_price = max(float(variation['price']) for variation in product['variations'])
+            else:
+                max_price = float(product['price'])
+
+            print(f"Highest price from WooCommerce: {max_price}")
+
+            item.price = max_price
+            item.save()
+
+            print(f"Updated Item ID: {item.id} - Name: {item.name}, Price: {item.price}")
+
+        except Exception as e:
+            print(f"Error updating item {item.id}: {e}")
