@@ -3,7 +3,6 @@ from django.core.management.base import BaseCommand
 import shopify
 from studio.models import Item, EcommerceStore
 
-
 class Command(BaseCommand):
     help = 'Update item name and price based on Shopify product data'
 
@@ -15,14 +14,25 @@ class Command(BaseCommand):
             cat__in=['dress', 'top', 'bottom', 'accessory']
         )
 
+        # Print the number of items found
+        print(f"Found {items.count()} items to process.")
+
+        if not items.exists():
+            print("No items found matching the criteria.")
+            return
+
         for item in items:
             ecommerce_store = item.ecommerce_store
+            print(f"Processing Item ID: {item.id} - {item.name}")
 
             # Get Shopify credentials
             api_key = ecommerce_store.api_key
             api_secret = ecommerce_store.api_secret
             api_access_token = ecommerce_store.api_access_token
             shop_url = f"https://{ecommerce_store.shop_url}/admin"
+
+            # Print Shopify credentials (masked for security)
+            print(f"Connecting to Shopify store: {shop_url}")
 
             # Connect to Shopify
             shopify.ShopifyResource.set_site(shop_url)
@@ -31,22 +41,24 @@ class Command(BaseCommand):
 
             try:
                 # Fetch product from Shopify
-                self.stdout.write(self.style.NOTICE(f"Fetching product {item.ecommerce_product_id} for Item ID: {item.id}"))
+                print(f"Fetching product {item.ecommerce_product_id} for Item ID: {item.id}")
                 product = shopify.Product.find(item.ecommerce_product_id)
 
                 if not product:
-                    self.stdout.write(self.style.WARNING(f"No product found for Item ID: {item.id}"))
+                    print(f"No product found for Item ID: {item.id}")
                     continue
 
                 # Update item name and price
                 item.name = product.title
+                print(f"Product title from Shopify: {product.title}")
+
                 max_price = max(float(variant.price) for variant in product.variants)
+                print(f"Highest variant price from Shopify: {max_price}")
+
                 item.price = max_price
                 item.save()
 
-                self.stdout.write(self.style.SUCCESS(
-                    f"Updated Item ID: {item.id} - Name: {product.title}, Price: {max_price}"
-                ))
+                print(f"Updated Item ID: {item.id} - Name: {item.name}, Price: {item.price}")
 
             except Exception as e:
-                self.stderr.write(self.style.ERROR(f"Error updating item {item.id}: {e}"))
+                print(f"Error updating item {item.id}: {e}")
