@@ -122,4 +122,5 @@ class Command(BaseCommand):
         except Exception as e:
             print(f"Error updating item {item.id}: {e}")
 
+        print('')
 
