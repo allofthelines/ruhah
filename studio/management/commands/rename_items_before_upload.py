@@ -25,8 +25,6 @@ CSV_FILE_NAME = 'itemids.csv'
 LOCAL_CSV_FILE = 'local_itemids.csv'
 JSON_FILE_PATH = os.path.join(settings.BASE_DIR, 'studio', 'static', 'studio', 'new_items.json')
 
-
-
 class Command(BaseCommand):
     help = 'Rename images to unique 8-digit numbers and update the JSON file'
 
@@ -113,8 +111,12 @@ class Command(BaseCommand):
             with open(LOCAL_CSV_FILE, 'r') as csvfile:
                 csv_reader = csv.reader(csvfile)
                 for row in csv_reader:
-                    if row:
-                        existing_ids.add(int(row[0]))
+                    # Check and ignore empty values or lines
+                    if row and row[0].strip():  # <-- This is where it checks and ignores empty values or lines
+                        try:
+                            existing_ids.add(int(row[0]))
+                        except ValueError as e:
+                            print(f"Skipping invalid row: {row} - Error: {e}")
 
         # Rename files and get new names mapping
         new_names = self.rename_files(LOCAL_DIRECTORY, existing_ids)
