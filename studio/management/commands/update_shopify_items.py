@@ -82,50 +82,41 @@ class Command(BaseCommand):
         store_url = ecommerce_store.shop_url
 
         # WooCommerce API endpoint to fetch product data
-        https_product_url = f"https://{store_url}/wp-json/wc/v3/products/{item.ecommerce_product_id}"
-        http_product_url = f"http://{store_url}/wp-json/wc/v3/products/{item.ecommerce_product_id}"
+        product_url = f"https://{store_url}/wp-json/wc/v3/products/{item.ecommerce_product_id}"
 
         print(f"Connecting to WooCommerce store: {store_url}")
 
-        # Try HTTPS first
         try:
-            response = requests.get(https_product_url, auth=(consumer_key, consumer_secret), verify=False)
-            response.raise_for_status()  # Raises HTTPError for bad responses
+            # Make a GET request to fetch the product data
+            response = requests.get(product_url, auth=(consumer_key, consumer_secret), verify=False)
 
-        except SSLError as ssl_error:
-            print(f"SSL error encountered: {ssl_error}. Falling back to HTTP...")
-
-            # Try HTTP if HTTPS fails
-            try:
-                response = requests.get(http_product_url, auth=(consumer_key, consumer_secret), verify=False)
-                response.raise_for_status()
-            except Exception as e:
-                print(f"Failed to fetch product {item.ecommerce_product_id} over HTTP: {e}")
+            # If response is not successful, raise an exception
+            if response.status_code != 200:
+                print(f"Failed to fetch product {item.ecommerce_product_id}: {response.text}")
                 return
 
+            product = response.json()
+
+            # Update item name
+            item.name = product.get('name', 'Unnamed Product')
+            print(f"Product title from WooCommerce: {item.name}")
+
+            # Find the highest price among variations (if available)
+            variations = product.get('variations', [])
+
+            # Ensure variations is a list
+            if isinstance(variations, list) and variations:
+                max_price = max(float(variation.get('price', 0)) for variation in variations if 'price' in variation)
+            else:
+                max_price = float(product.get('price', 0))
+
+            print(f"Highest price from WooCommerce: {max_price}")
+
+            item.price = max_price
+            item.save()
+
+            print(f"Updated Item ID: {item.id} - Name: {item.name}, Price: {item.price}")
+
         except Exception as e:
-            print(f"Failed to fetch product {item.ecommerce_product_id} over HTTPS: {e}")
-            return
+            print(f"Error updating item {item.id}: {e}")
 
-        # Process the response if successful
-        product = response.json()
-
-        # Update item name and price
-        item.name = product['name']
-        print(f"Product title from WooCommerce: {product['name']}")
-
-        # Find the highest price among variations (if available)
-        variations = product.get('variations')
-        if isinstance(variations, list) and variations:
-            # If variations is a list, find the highest price among them
-            max_price = max(float(variation['price']) for variation in variations)
-        else:
-            # If no variations, use the product's base price
-            max_price = float(product.get('price', 0))
-
-        print(f"Highest price from WooCommerce: {max_price}")
-
-        item.price = max_price
-        item.save()
-
-        print(f"Updated Item ID: {item.id} - Name: {item.name}, Price: {item.price}")
