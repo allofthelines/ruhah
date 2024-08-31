@@ -89,7 +89,7 @@ class Command(BaseCommand):
 
         # Try HTTPS first
         try:
-            response = requests.get(https_product_url, auth=(consumer_key, consumer_secret))
+            response = requests.get(https_product_url, auth=(consumer_key, consumer_secret), verify=False)
             response.raise_for_status()  # Raises HTTPError for bad responses
 
         except SSLError as ssl_error:
@@ -97,7 +97,7 @@ class Command(BaseCommand):
 
             # Try HTTP if HTTPS fails
             try:
-                response = requests.get(http_product_url, auth=(consumer_key, consumer_secret))
+                response = requests.get(http_product_url, auth=(consumer_key, consumer_secret), verify=False)
                 response.raise_for_status()
             except Exception as e:
                 print(f"Failed to fetch product {item.ecommerce_product_id} over HTTP: {e}")
