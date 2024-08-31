@@ -104,10 +104,12 @@ class Command(BaseCommand):
             # Find the highest price among variations (if available)
             variations = product.get('variations', [])
 
-            # Ensure variations is a list
+            # Ensure variations is a list and not an integer
             if isinstance(variations, list) and variations:
+                # Check if each variation has a price and find the maximum
                 max_price = max(float(variation.get('price', 0)) for variation in variations if 'price' in variation)
             else:
+                # If variations are not present or not a list, fallback to the main product price
                 max_price = float(product.get('price', 0))
 
             print(f"Highest price from WooCommerce: {max_price}")
@@ -119,4 +121,5 @@ class Command(BaseCommand):
 
         except Exception as e:
             print(f"Error updating item {item.id}: {e}")
+
 
