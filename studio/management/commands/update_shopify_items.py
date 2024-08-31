@@ -75,6 +75,8 @@ class Command(BaseCommand):
         except Exception as e:
             print(f"Error updating item {item.id}: {e}")
 
+        print('')
+
     def process_woocommerce_item(self, item, ecommerce_store):
         # Get WooCommerce credentials
         consumer_key = ecommerce_store.api_key
