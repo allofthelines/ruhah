@@ -115,10 +115,13 @@ class Command(BaseCommand):
         print(f"Product title from WooCommerce: {product['name']}")
 
         # Find the highest price among variations (if available)
-        if 'variations' in product:
-            max_price = max(float(variation['price']) for variation in product['variations'])
+        variations = product.get('variations')
+        if isinstance(variations, list) and variations:
+            # If variations is a list, find the highest price among them
+            max_price = max(float(variation['price']) for variation in variations)
         else:
-            max_price = float(product['price'])
+            # If no variations, use the product's base price
+            max_price = float(product.get('price', 0))
 
         print(f"Highest price from WooCommerce: {max_price}")
 
