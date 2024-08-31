@@ -14,6 +14,9 @@ from botocore.exceptions import NoCredentialsError
 aws/itemids.csv
 
 metonomase ta 1 2 se 12345678 23456789, kainourgious kwdikous
+NOMIZW TA PERNAEI KAI STO JSON KANONIKA AFTOMATA
+OPOTE TREKSTO AFTO SKETO ME 1 2 3 KLP SE JSON KAI THA PERASOUN AFTOMATA PANTOU
+KAI SE FWTOGRAFIES KAI SE JSON
 """
 
 # Initialize Django settings
