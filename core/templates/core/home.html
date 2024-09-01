@@ -41,7 +41,7 @@
       <!-- WHAT IS SECTION -->
       <h2 style="text-align: center; margin: 50px 0px 78px 0px;">AT RUHAH YOU CAN</h2>
 
-      {% comment %}
+        {% comment %}
       <div id="contWHAT">
         <!-- Image container -->
         <div id="contWHAT-img">
@@ -49,7 +49,12 @@
         </div>
       </div>
       {% endcomment %}
-      <h2 style="text-align: center; margin: 50px 0px 78px 0px; font-family: "Arial Black", Arial, sans-serif;">GET FASHION<br>GIVE FASHION<br>BUY FASHION<br>SELL FASHION<br>MAKE FRIENDS</h2>
+        <div id="contWHAT">
+          <div id="contWHAT-img">
+            <img id="toggle-image" src="{% static 'images/landing/thinkrandom1.jpg' %}" alt="What is Image" style="width: 100%;">
+          </div>
+        </div>
+
 
 
 
@@ -135,6 +140,23 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+
+      // Script for image toggle
+    const imageElement = document.getElementById("toggle-image");
+    const imagePaths = [
+      "{% static 'images/landing/thinkrandom1.jpg' %}",
+      "{% static 'images/landing/makefriends1.jpg' %}",
+      "{% static 'images/landing/tryblue1.jpg' %}"
+    ];
+    let currentImageIndex = 0;
+
+    setInterval(function() {
+      currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+      imageElement.src = imagePaths[currentImageIndex];
+    }, 2000); // Change every 2 seconds
+
+
+
     // Script for POV: YOU ARE section (previous one)
     const textElement = document.getElementById("dynamic-text");
     const phrases = ["JUST CAN'T DECIDE", "WANT STYLING ADVICE", "DON'T HAVE THE TIME"];
