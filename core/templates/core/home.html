@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block content %}
-  {% if user.is_authenticated %}
+
+
     <!-- Display current page for logged-in users -->
     <form id="outfits-form" method="post">
       {% csrf_token %}
@@ -25,7 +26,15 @@
         {% endfor %}
       </div>
     </form>
-  {% else %}
+
+
+
+
+
+
+
+
+    {% comment %}
     <!-- Display new landing page for guest users -->
     <div id="landing-container" style="width: 90%; max-width: 2000px; margin: -25px auto 0 auto;">
 
@@ -40,6 +49,7 @@
 
       <!-- WHAT IS SECTION -->
       <!-- <h2 style="text-align: center; margin: 50px 0px 78px 0px;">AT RUHAH YOU CAN</h2>-->
+      {% endcomment %}
 
         {% comment %}
       <div id="contWHAT">
@@ -302,5 +312,5 @@
       }
     </style>
 
-  {% endif %}
+
 {% endblock %}
