@@ -136,7 +136,9 @@
 
 
 
-
+{% comment %}
+"{% static 'images/landing/makefriends1.jpg' %}",
+{% endcomment %}
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -145,7 +147,6 @@
     const imageElement = document.getElementById("toggle-image");
     const imagePaths = [
       "{% static 'images/landing/thinkrandom1.jpg' %}",
-      "{% static 'images/landing/makefriends1.jpg' %}",
       "{% static 'images/landing/tryblue1.jpg' %}"
     ];
     let currentImageIndex = 0;
