@@ -11,5 +11,6 @@ urlpatterns = [
     path("privacy/", views.PrivacyView.as_view(), name="privacy"),
     path("help/", views.HelpView.as_view(), name="help"),
     path("social/", views.SocialView.as_view(), name="social"),
+    path('about/', views.AboutView.as_view(), name='about'),
     path('search/', views.search, name='search'),
 ]

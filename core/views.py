@@ -105,6 +105,9 @@ class HelpView(TemplateView):
 class SocialView(TemplateView):
     template_name = 'core/social.html'
 
+class AboutView(TemplateView):
+    template_name = 'core/about.html'
+
 
 
 
