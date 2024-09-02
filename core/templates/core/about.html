@@ -7,7 +7,7 @@
 
 {% block content %}
 <div id="about" class="content-section" style="display: block;">
-    <p style="text-align: center; margin: 20px 0px 78px 0px; font-size: 18px; font-family: 'Work Sans', sans-serif; font-weight: 600;">
+    <p style="text-align: center; margin: 20px 0px 78px 0px; font-size: 18px; font-family: 'Work Sans', sans-serif; font-weight: 600; max-width: 150px;">
         Ruhah is a community-powered style platform where users request outfits from fellow fashion enthusiasts
         and receive curated looks tailored to their needs.
         Stylists earn whenever items from their created outfits are purchased.
@@ -150,8 +150,9 @@ h3 {
 /* For desktop mode */
 @media (min-width: 768px) {
     #landing-container {
-        width: 90%;
+        width: 70%;
         max-width: 2000px;
+        margin: 0 auto; /* Center the container */
     }
 
     #contWHAT-img {
