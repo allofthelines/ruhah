@@ -108,8 +108,8 @@ class SocialView(TemplateView):
 class AboutView(TemplateView):
     template_name = 'core/about.html'
 
-class ClickView(TemplateView):
-    template_name = 'core/click.html'
+class HelloView(TemplateView):
+    template_name = 'core/hello.html'
 
 
 
