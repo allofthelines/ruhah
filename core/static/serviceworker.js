@@ -1,13 +1,12 @@
 const CACHE_NAME = 'ruhah-cache-v1';
 const urlsToCache = [
   '/',  // Cache the home page
-  '/offline/',  // Offline page URL
+  '/offline/',  // Offline page URL oxi to offline.html stoo static/ alla afto sto templates
   // Direct URLs to the static files at the root level
   // ta evala etsi giati gamimeno to static sta settings des bugs.txt
   'https://ruhahbucket.s3.amazonaws.com/core/styles.css',
   'https://ruhahbucket.s3.amazonaws.com/core/scripts.js',
   'https://ruhahbucket.s3.amazonaws.com/manifest.json',
-  // Add more URLs as needed
 ];
 
 // Install event - caching the offline page and other assets
