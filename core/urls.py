@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from django.views.generic import TemplateView
 
 app_name = "core"
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('hello/', views.HelloView.as_view(), name='hello'),
     path('search/', views.search, name='search'),
+    path('offline/', TemplateView.as_view(template_name='core/offline.html'), name='offline'),
 ]
