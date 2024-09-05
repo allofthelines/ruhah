@@ -14,7 +14,7 @@
         <div style="margin-bottom: 7px;">Style: {{ form.style1 }}</div>
         <div style="margin-bottom: 12px;">Stylist: {{ form.stylist_username.value }}</div>
         <div style="margin-bottom: 25px;">
-            {% if form.private_ask_price_display.value == '0' %}
+            {% if form.private_ask_price_display.value == 'Free' or form.private_ask_price_display.value == '0' %}
                 Price: Free
             {% else %}
                 Price: {{ form.private_ask_price_display.value }} Credits
