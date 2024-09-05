@@ -181,6 +181,7 @@ def ticket_view(request):
 
 from django.contrib.auth import get_user_model
 
+
 def private_ask_view(request, stylist_username):
     # Get the target stylist user
     User = get_user_model()
