@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block page-header %}
+    Private Ask
+{% endblock %}
+
+{% block content %}
+<div style="border: 1px solid black; padding: 15px;">
+    <!-- Form for private ask submission -->
+    <form method="post" action="{% url 'box:private_ask' stylist_username=form.stylist_username.value %}">
+        {% csrf_token %}
+        {{ form.stylist_username.label_tag }} {{ form.stylist_username }}<br>
+        {{ form.stylist_type.label_tag }} {{ form.stylist_type }}<br>
+        {{ form.style1.label_tag }} {{ form.style1 }}<br>
+        {{ form.notes.label_tag }}<br> {{ form.notes }}<br>
+        {{ form.private_ask_price_display.label_tag }} {{ form.private_ask_price_display }}<br>
+        <br>
+        <button type="submit">Submit Ask</button>
+    </form>
+</div>
+
+<!-- Button to return to the user profile page -->
+<div style="text-align: center; margin-top: 20px;">
+    <button onclick="window.location.href='{% url 'accounts:public_profile' stylist_username=form.stylist_username.value %}'">
+        Back to User
+    </button>
+</div>
+    
+{% endblock %}

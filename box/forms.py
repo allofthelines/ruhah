@@ -79,6 +79,35 @@ class AskFitForm(forms.Form):
         # 'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'
     }), required=False)
 
+class PrivateAskFitForm(forms.Form):
+    style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
+    stylist_type = forms.CharField(
+        label='Stylist',
+        initial='Private',
+        required=False,
+        widget=forms.TextInput(attrs={'readonly': 'readonly'})  # Read-only to indicate it's private
+    )
+    stylist_username = forms.CharField(label='Stylist', required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'})  # Make it read-only)
+    private_ask_price_display = forms.CharField(label='Price (Credits)', required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'})  # Make it read-only)
+    notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
+        'rows': 4,
+        'cols': 30
+    }), required=False)
+
+    def __init__(self, *args, **kwargs):
+        # Accept additional keyword arguments for stylist and price
+        stylist_username = kwargs.pop('stylist_username', None)
+        private_ask_price = kwargs.pop('private_ask_price', None)
+        super().__init__(*args, **kwargs)
+
+        # Set initial values for display-only fields
+        self.fields['stylist_username'].initial = stylist_username
+        self.fields['stylist_type'].initial = 'private'
+        if private_ask_price == 0:
+            self.fields['private_ask_price_display'].initial = "Free"
+        else:
+            self.fields['private_ask_price_display'].initial = f"{private_ask_price} Credits"
+
 
 class AskBoxForm(forms.Form):
 
