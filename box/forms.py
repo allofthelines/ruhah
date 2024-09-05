@@ -80,6 +80,12 @@ class AskFitForm(forms.Form):
     }), required=False)
 
 class PrivateAskFitForm(forms.Form):
+
+    try:
+        casual_style = Style.objects.get(style_name='casual')
+    except Style.DoesNotExist:
+        casual_style = None
+
     style1 = forms.ModelChoiceField(queryset=Style.objects.all(), label='Style', initial=casual_style)
     stylist_type = forms.CharField(
         label='Stylist',
