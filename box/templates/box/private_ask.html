@@ -8,14 +8,15 @@
 {% block content %}
 <div style="border: 1px solid black; padding: 15px;">
     <!-- Form for private ask submission -->
-    <form method="post" action="{% url 'box:private_ask' stylist_username=form.stylist_username.value %}">
+    <form method="post" action="{% url 'box:private_ask' stylist_username=form.stylist_username.value %}" class="ticket-form">
         {% csrf_token %}
-        <!-- Display fields in the desired order without input boxes -->
-        <div>Style: {{ form.style1 }}</div>
-        <div>Stylist: {{ form.stylist_username.value }}</div>
-        <div>Price (Credits): {{ form.private_ask_price_display.value }}</div>
-        <div>{{ form.notes.label_tag }}<br> {{ form.notes }}</div>
-        <br>
+        <!-- Display fields in the desired order with additional spacing -->
+        <div style="margin-bottom: 10px;">Style: {{ form.style1 }}</div>
+        <div style="margin-bottom: 10px;">Stylist: {{ form.stylist_username.value }}</div>
+        <div style="margin-bottom: 20px;">Price (Credits): {{ form.private_ask_price_display.value }}</div>
+        <div style="margin-bottom: 10px;">
+            {{ form.notes.label_tag }}<br> {{ form.notes }}
+        </div>
         <button type="submit">Submit Ask</button>
     </form>
 </div>
