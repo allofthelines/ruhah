@@ -11,10 +11,10 @@
     <form method="post" action="{% url 'box:private_ask' stylist_username=form.stylist_username.value %}" class="ticket-form">
         {% csrf_token %}
         <!-- Display fields in the desired order with additional spacing -->
-        <div style="margin-bottom: 0px;">Style: {{ form.style1 }}</div>
+        <div style="margin-bottom: 9px;">Style: {{ form.style1 }}</div>
         <div style="margin-bottom: 10px;">Stylist: {{ form.stylist_username.value }}</div>
         <div style="margin-bottom: 25px;">Price (Credits): {{ form.private_ask_price_display.value }}</div>
-        <div style="margin-bottom: 20px;">
+        <div style="margin-bottom: 19px;">
             {{ form.notes.label_tag }}<br> {{ form.notes }}
         </div>
         <button type="submit">Submit Ask</button>
