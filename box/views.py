@@ -190,7 +190,7 @@ def private_ask_view(request, stylist_username):
     # Check if the stylist accepts private asks
     if stylist.accept_private_asks != 'yes':
         messages.error(request, 'This user does not accept private asks.')
-        return redirect('accounts:public_profile', stylist_username=stylist_username)
+        return redirect('accounts:public_profile', username=stylist_username)
 
     # Fetch the price set by the stylist
     private_ask_price = stylist.private_ask_price
@@ -213,15 +213,16 @@ def private_ask_view(request, stylist_username):
             stylist.save()
 
             # Create the ticket
-            Ticket.objects.create(
-                creator_id=request.user,  # Use the correct field name
-                style1=form.cleaned_data['style1'],  # This is correct
-                notes=form.cleaned_data['notes'],  # This is correct
-                stylist_type='private',  # Assuming this is the correct field for tracking the stylist type
+            ticket = Ticket.objects.create(
+                creator_id=request.user,  # Use creator_id field
+                style1=form.cleaned_data['style1'],  # Use style1 field
+                notes=form.cleaned_data['notes'],
+                stylist_type='private'  # Assuming this field exists and is correctly named
             )
 
             messages.success(request, 'Your private ask has been submitted successfully.')
-            return redirect('box:ask_fit_success')
+            # Redirect to success page with ticket_id
+            return redirect('box:ask_fit_success', ticket_id=ticket.id)
     else:
         # Initialize the form for a GET request
         form = PrivateAskFitForm(stylist_username=stylist_username, private_ask_price=private_ask_price)
