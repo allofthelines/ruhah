@@ -87,7 +87,7 @@ class PrivateAskFitForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'readonly': 'readonly'})  # Read-only to indicate it's private
     )
-    stylist_username = forms.CharField(label='Stylist', required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'})  # Make it read-only)
+    stylist_username = forms.CharField(label='Stylist', required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     private_ask_price_display = forms.CharField(label='Price (Credits)', required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'})  # Make it read-only)
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
