@@ -179,9 +179,12 @@ def ticket_view(request):
     })
 
 
+from django.contrib.auth import get_user_model
+
 def private_ask_view(request, stylist_username):
     # Get the target stylist user
-    stylist = get_object_or_404(settings.AUTH_USER_MODEL, username=stylist_username)
+    User = get_user_model()
+    stylist = get_object_or_404(User, username=stylist_username)
 
     # Check if the stylist accepts private asks
     if stylist.accept_private_asks != 'yes':
