@@ -214,11 +214,10 @@ def private_ask_view(request, stylist_username):
 
             # Create the ticket
             Ticket.objects.create(
-                user=request.user,
-                style=form.cleaned_data['style1'],
-                notes=form.cleaned_data['notes'],
-                stylist_type='private',
-                target_stylist_username=stylist.username
+                creator_id=request.user,  # Use the correct field name
+                style1=form.cleaned_data['style1'],  # This is correct
+                notes=form.cleaned_data['notes'],  # This is correct
+                stylist_type='private',  # Assuming this is the correct field for tracking the stylist type
             )
 
             messages.success(request, 'Your private ask has been submitted successfully.')
@@ -228,6 +227,7 @@ def private_ask_view(request, stylist_username):
         form = PrivateAskFitForm(stylist_username=stylist_username, private_ask_price=private_ask_price)
 
     return render(request, 'box/private_ask.html', {'form': form})
+
 
 
 
