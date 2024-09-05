@@ -351,12 +351,15 @@ function toggleFollowUnfollow(username, isFollowing) {
 
     .clickable-profile-picture {
         display: inline-block; /* Allows adding space around the image */
-        padding: 0px; /* Adds a 5px gap between the image and the border */
+        padding: 1px; /* No extra padding needed */
         border-radius: 50%; /* Makes the border circular */
         cursor: pointer; /* Changes the cursor to indicate the image is clickable */
         background-color: white; /* Ensures there's a white background within the circular border */
-        box-shadow: 0 0 0 2px black; /* Adds a centered 1px black border around the image */
+        box-shadow: 0 0 0 2px black; /* Adds a centered 2px black border around the image */
+        position: relative; /* Allows positioning adjustments */
+        top: -3px; /* Moves the border 5px up */
     }
+
 
     .profile-picture {
         width: 100px;
