@@ -348,7 +348,8 @@ function toggleFollowUnfollow(username, isFollowing) {
         font-size: 20px;
         font-weight: 400;
     }
-
+    
+    {% comment %}
     .clickable-profile-picture {
         display: inline-block; /* Allows adding space around the image */
         padding: 1px; /* No extra padding needed */
@@ -359,6 +360,27 @@ function toggleFollowUnfollow(username, isFollowing) {
         position: relative; /* Allows positioning adjustments */
         top: -3px; /* Moves the border 5px up */
     }
+    {% endcomment %}
+
+    .clickable-profile-picture {
+        display: inline-block;
+        position: relative; /* Position context for the pseudo-element */
+        cursor: pointer; /* Changes the cursor to indicate the image is clickable */
+    }
+
+    .clickable-profile-picture::before {
+        content: ''; /* Required for pseudo-element */
+        position: absolute;
+        top: -5px; /* Moves the border up by 5px */
+        left: -5px; /* Adjust to keep border centered horizontally */
+        right: -5px; /* Adjust to keep border centered horizontally */
+        bottom: -5px; /* Adjust to keep border centered vertically */
+        border: 2px solid black; /* Border width and color */
+        border-radius: 50%; /* Makes the border circular */
+        pointer-events: none; /* Ensures the pseudo-element does not block clicks */
+        background-color: white; /* Ensures the white background for the gap */
+    }
+
 
 
     .profile-picture {
