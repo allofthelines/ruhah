@@ -22,7 +22,7 @@
 
 <!-- Button to return to the user profile page -->
 <div style="text-align: center; margin-top: 20px;">
-    <button onclick="window.location.href='{% url 'accounts:public_profile' stylist_username=form.stylist_username.value %}'">
+     <button onclick="window.location.href='{% url 'accounts:public_profile' username=form.stylist_username.value %}'">
         Back to User
     </button>
 </div>
