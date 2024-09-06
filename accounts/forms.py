@@ -119,6 +119,9 @@ class UserProfileForm(forms.ModelForm):
             user.bio = self.cleaned_data['bio']
             if 'pfp' in self.cleaned_data:
                 user.pfp = self.cleaned_data['pfp']
+        if commit:
+            user.save()
+        return user
 
     """def save(self, commit=True, user=None):
         user = super().save(commit=False)
@@ -127,11 +130,12 @@ class UserProfileForm(forms.ModelForm):
         user.name = self.cleaned_data['name']
         user.bio = self.cleaned_data['bio']
         if 'pfp' in self.cleaned_data:
-            user.pfp = self.cleaned_data['pfp']"""
+            user.pfp = self.cleaned_data['pfp']
 
         if commit:
             user.save()
         return user
+        """
 
 
 
