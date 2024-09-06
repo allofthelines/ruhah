@@ -87,7 +87,7 @@ class SignUpForm(UserCreationForm):
 
 
 class UserProfileForm(forms.ModelForm):
-    email = forms.EmailField(required=False)
+    email = forms.EmailField(required=False) # FIXES TO PROBLHMA OTI DEN ALLAZEI USERNAME
 
     class Meta:
         model = CustomUser
