@@ -75,7 +75,8 @@ class AskFitForm(forms.Form):
     catalogue = forms.ChoiceField(choices=CATALOGUE_CHOICES, label='Catalogue', required=False)
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
-        'cols': 30
+        'cols': 30,
+        'style': 'background-color: #F5F5F5;'
         # 'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'
     }), required=True)
 
@@ -97,8 +98,8 @@ class PrivateAskFitForm(forms.Form):
     private_ask_price_display = forms.CharField(label='Price (Credits)', required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
-        'cols': 30
-        # 'style': 'background-color: #FFFFCC;'
+        'cols': 30,
+        'style': 'background-color: #FFFFCC;'
     }), required=True)
 
     def __init__(self, *args, **kwargs):
