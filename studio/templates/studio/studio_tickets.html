@@ -22,7 +22,7 @@
           {% with ticket.creator_id.id as creator_id %}
             {% with ticket.creator_id.lifeform as creator_lifeform %}
               {% if ticket.asktype == 'box' %}
-                <tr style="background-color: #FDFD96;"> <!--light yellow-->
+                <tr style="background-color: #FF0000;"> <!--light yellow #FDFD96-->
               {% elif ticket.asktype == 'outfit' %}
                 <tr style="background-color: #F5F5F5;"> <!--light grey-->
               {% elif creator_id in following_user_ids %}
