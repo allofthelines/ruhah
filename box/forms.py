@@ -97,8 +97,8 @@ class PrivateAskFitForm(forms.Form):
     private_ask_price_display = forms.CharField(label='Price (Credits)', required=False, widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
-        'cols': 30,
-        'style': 'background-color: #FFFFCC;'
+        'cols': 30
+        # 'style': 'background-color: #FFFFCC;'
     }), required=True)
 
     def __init__(self, *args, **kwargs):
