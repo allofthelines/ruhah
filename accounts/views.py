@@ -135,10 +135,17 @@ def profile(request):
         if 'user_form' in request.POST:
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
             if user_form.is_valid():
-                print("\n\n\n\n\nForm is valid. Username to be saved:", user_form.cleaned_data['username'])
-                user_form.save(user=user)
-                print("\n\n\n\n\nUser saved successfully with username:", user.username)
+                print("DEBUG: Form is valid")
+                print("DEBUG: Current username in form before save:", user_form.cleaned_data['username'])
+                saved_user = user_form.save(commit=True)
+                print("DEBUG: Username after form save:", saved_user.username)  # Confirm the username after save
+                print("DEBUG: Username directly from DB after form save:",
+                      CustomUser.objects.get(id=user.id).username)  # Check directly from DB
                 return redirect(f'{request.path}?edit=user')
+            else:
+                print("DEBUG: Form is not valid")
+                print("Form errors:", user_form.errors)  # Print form errors if form is not valid
+            # Handle other forms...
         elif 'customer_form' in request.POST and customer:
             customer_form = CustomerForm(request.POST, instance=customer, customer=customer)
             if customer_form.is_valid():
