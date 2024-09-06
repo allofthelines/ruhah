@@ -22,9 +22,9 @@
           {% with ticket.creator_id.id as creator_id %}
             {% with ticket.creator_id.lifeform as creator_lifeform %}
               {% if ticket.stylist_type == 'private' and ticket.private_stylist == user %}
-                <tr style="background-color: #FAA0A0;">
+                <tr style="background-color: #FDFD96;">
               {% elif ticket.asktype == 'box' %}
-                <tr style="background-color: #FDFD96;"> <!--light yellow #FDFD96-->
+                <tr style="background-color: #A7C7E7;"> <!--light yellow #FDFD96-->
               {% elif ticket.asktype == 'outfit' %}
                 <tr style="background-color: #F5F5F5;"> <!--light grey-->
               {% elif creator_id in following_user_ids %}
