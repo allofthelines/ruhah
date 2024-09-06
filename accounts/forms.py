@@ -91,13 +91,13 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'name', 'bio', 'pfp']
+        fields = ['username', 'name', 'bio', 'pfp'] # evgala email
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         if user:
-            self.fields['email'].initial = user.email
+            # self.fields['email'].initial = user.email
             self.fields['username'].initial = user.username
             self.fields['name'].initial = user.name
             self.fields['bio'].initial = user.bio
@@ -111,7 +111,7 @@ class UserProfileForm(forms.ModelForm):
 
     def save(self, commit=True, user=None):
         user = super().save(commit=False)
-        user.email = self.cleaned_data['email']
+        # user.email = self.cleaned_data['email']
         user.username = self.cleaned_data['username']
         user.name = self.cleaned_data['name']
         user.bio = self.cleaned_data['bio']
