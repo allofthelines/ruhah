@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div style="border: 1px solid black; padding: 15px; background-color: #FFFFCC;">
+<div style="border: 1px solid black; padding: 15px;">
     <!-- Form for private ask submission -->
     <form method="post" action="{% url 'box:private_ask' stylist_username=form.stylist_username.value %}" class="ticket-form">
         {% csrf_token %}
