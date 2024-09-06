@@ -110,20 +110,6 @@ class UserProfileForm(forms.ModelForm):
         return username
 
     def save(self, commit=True, user=None):
-        if user is None:
-            user = super().save(commit=False)  # Fallback to default saving behavior if no user is provided
-        else:
-            user.email = self.cleaned_data['email']
-            user.username = self.cleaned_data['username']
-            user.name = self.cleaned_data['name']
-            user.bio = self.cleaned_data['bio']
-            if 'pfp' in self.cleaned_data:
-                user.pfp = self.cleaned_data['pfp']
-        if commit:
-            user.save()
-        return user
-
-    """def save(self, commit=True, user=None):
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
         user.username = self.cleaned_data['username']
@@ -135,7 +121,6 @@ class UserProfileForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-        """
 
 
 
