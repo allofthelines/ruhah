@@ -77,7 +77,7 @@ class AskFitForm(forms.Form):
         'rows': 4,
         'cols': 30
         # 'placeholder': '"experiment with patterns"\n"use pastel palette"\n"make it comfy"\n"do not include footwear"'
-    }), required=False)
+    }), required=True)
 
 class PrivateAskFitForm(forms.Form):
 
@@ -99,7 +99,7 @@ class PrivateAskFitForm(forms.Form):
         'rows': 4,
         'cols': 30,
         'style': 'background-color: #FFFFCC;'
-    }), required=False)
+    }), required=True)
 
     def __init__(self, *args, **kwargs):
         # Accept additional keyword arguments for stylist and price
