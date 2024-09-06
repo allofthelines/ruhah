@@ -135,7 +135,8 @@ def profile(request):
         if 'user_form' in request.POST:
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
             if user_form.is_valid():
-                user_form.save(user=user)
+                # user_form.save(user=user) # htan etsi prin to allaksw 6 september pou den allaze username
+                user_form.save(commit=True) # to evala mhpws allaksei username
                 return redirect(f'{request.path}?edit=user')
         elif 'customer_form' in request.POST and customer:
             customer_form = CustomerForm(request.POST, instance=customer, customer=customer)
@@ -173,7 +174,8 @@ def profile(request):
         'user_form': user_form,
         'customer_form': customer_form,
         'portrait_upload_form': portrait_upload_form,
-        'profile_settings_form': profile_settings_form,
+        'profile_s'
+        'ettings_form': profile_settings_form,
         'gridpic_upload_form': gridpic_upload_form,  # Add this line
         'user': user,
         'available_styles': available_styles,
