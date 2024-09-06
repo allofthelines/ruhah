@@ -135,8 +135,9 @@ def profile(request):
         if 'user_form' in request.POST:
             user_form = UserProfileForm(request.POST, request.FILES, instance=user, user=user)
             if user_form.is_valid():
-                # user_form.save(user=user) # htan etsi prin to allaksw 6 september pou den allaze username
-                user_form.save(commit=True) # to evala mhpws allaksei username
+                print("\n\n\n\n\nForm is valid. Username to be saved:", user_form.cleaned_data['username'])
+                user_form.save(user=user)
+                print("\n\n\n\n\nUser saved successfully with username:", user.username)
                 return redirect(f'{request.path}?edit=user')
         elif 'customer_form' in request.POST and customer:
             customer_form = CustomerForm(request.POST, instance=customer, customer=customer)
