@@ -98,7 +98,7 @@ class PrivateAskFitForm(forms.Form):
     notes = forms.CharField(max_length=200, label='Note to Stylist', widget=forms.Textarea(attrs={
         'rows': 4,
         'cols': 30,
-        'style': 'background-color: #FDFD96;'
+        'style': 'background-color: #FFFFCC;'
     }), required=False)
 
     def __init__(self, *args, **kwargs):
