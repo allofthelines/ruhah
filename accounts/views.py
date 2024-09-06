@@ -165,6 +165,8 @@ def profile(request):
                 selected_studio_styles = request.POST.getlist('studio_styles')
                 user.trending_styles.set(selected_trending_styles)
                 user.studio_styles.set(selected_studio_styles)
+                user.accept_private_asks = request.POST.get('accept_private_asks', 'yes')
+                user.private_ask_price = request.POST.get('private_ask_price', 0)
                 return redirect(f'{request.path}?edit_settings=false')
 
     context = {

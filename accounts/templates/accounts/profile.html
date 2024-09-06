@@ -730,7 +730,13 @@
                                     {{ style.style_name }}
                                 </label>
                             {% endfor %}
-                        </div><br>
+                        </div><br><br>
+
+                        <label for="id_accept_private_asks">Accept Private Asks:</label>
+                        {{ profile_settings_form.accept_private_asks }}<br><br>
+
+                        <label for="id_private_ask_price">Private Ask Price:</label>
+                        {{ profile_settings_form.private_ask_price }}<br>
 
                         <!-- Add more fields here if needed -->
                     </p>
@@ -751,7 +757,9 @@
                     <span style="color: grey;">
                     {% for style in user_studio_styles %}
                         {{ style.style_name }}{% if not forloop.last %} {% endif %}
-                    {% endfor %}</span><br><br>
+                    {% endfor %}</span><br>
+                    Accept Private Asks: <span style="color: grey;">{{ user.accept_private_asks }}</span><br><br>
+                    Private Ask Price: <span style="color: grey;">{{ user.private_ask_price }}</span><br><br>
                     <!-- Add more fields here if needed -->
                 </p>
                 <form method="get" action="{% url 'accounts:profile' %}">

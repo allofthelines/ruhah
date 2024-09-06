@@ -204,7 +204,7 @@ class GridPicUploadForm(forms.ModelForm):
 class ProfileSettingsForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['profile_visibility', 'trending_mode', 'trending_styles', 'studio_styles', 'studio_visibility']
+        fields = ['profile_visibility', 'trending_mode', 'trending_styles', 'studio_styles', 'studio_visibility', 'accept_private_asks', 'private_ask_price']
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -215,6 +215,8 @@ class ProfileSettingsForm(forms.ModelForm):
             self.fields['studio_visibility'].initial = user.studio_visibility
             self.fields['trending_styles'].initial = user.trending_styles.all()
             self.fields['studio_styles'].initial = user.studio_styles.all()
+            self.fields['accept_private_asks'].initial = user.accept_private_asks
+            self.fields['private_ask_price'].initial = user.private_ask_price
 
     def save(self, commit=True, user=None):
         user = super().save(commit=False)
@@ -223,6 +225,8 @@ class ProfileSettingsForm(forms.ModelForm):
         user.studio_visibility = self.cleaned_data['studio_visibility']
         user.trending_styles.set(self.cleaned_data['trending_styles'])
         user.studio_styles.set(self.cleaned_data['studio_styles'])
+        user.accept_private_asks = self.cleaned_data['accept_private_asks']
+        user.private_ask_price = self.cleaned_data['private_ask_price']
         user.save()
         return user
 
