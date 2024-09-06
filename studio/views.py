@@ -79,36 +79,50 @@ def studio_tickets(request):
 
     if request.user.is_authenticated:
         user_styles = set(request.user.studio_styles.values_list('id', flat=True))
-        following_user_ids = list(request.user.following_list.values_list('id', flat=True)) # ids of users logged-in user is following
-        user_following_ids = list(request.user.following.values_list('user_to_id', flat=True)) # ids of users logged-in user is following (same)
-        user_followers = list(request.user.followers.values_list('user_from_id', flat=True)) # ids of users following the logged-in user
-        # oi following tou creator = followers tou logged-in
+        following_user_ids = list(request.user.following_list.values_list('id', flat=True))  # IDs of users logged-in user is following
+        user_following_ids = list(request.user.following.values_list('user_to_id', flat=True))  # IDs of users logged-in user is following (same)
+        user_followers = list(request.user.followers.values_list('user_from_id', flat=True))  # IDs of users following the logged-in user
 
         print('\n1 DEBUG 666 \n', user_followers, '\nDEBUG\n')
 
-        # Filter tickets based on...
-        filtered_tickets = [ticket for ticket in ticket_list if
-                            # ticket.creator_id.id != request.user.id and  # ...if its the same guy
-                            (ticket.creator_id is None or ticket.creator_id.id != request.user.id) and # kalyptei kai periptwsh guest
-                            ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
-                            ticket.style1.id in user_styles and # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
-                            (ticket.stylist_type == 'everyone' or (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers)) # ...kalyptei o ticket creator na exei valei stylist == following
-                            ]
+        # Retrieve private tickets assigned to the logged-in user
+        private_tickets_for_user = Ticket.objects.filter(
+            stylist_type='private',
+            private_stylist=request.user,
+            status='open',
+            boxcuratedby='human_stylist'
+        )
+
+        # Filter other tickets based on existing criteria
+        other_filtered_tickets = [
+            ticket for ticket in ticket_list if
+            (ticket.creator_id is None or ticket.creator_id.id != request.user.id) and  # ...if its the same guy
+            ticket.has_submitted_outfits(request.user) and  # ...logged-in user exei hdh kanei submit x (des models.py) outfits se afto
+            ticket.style1.id in user_styles and  # ...user's studio_styles AFTO ISWS EINAI PROBLEM OTAN ALLAZOUN STYLES
+            (ticket.stylist_type == 'everyone' or
+             (ticket.stylist_type == 'following' and ticket.creator_id and ticket.creator_id.id in user_followers))  # ...kalyptei o ticket creator na exei valei stylist == following
+        ]
+
+        # Combine the lists, with private tickets first
+        combined_tickets = list(private_tickets_for_user) + other_filtered_tickets
 
         # Additional filtering based on studio_visibility
         if request.user.studio_visibility == 'following':
-            filtered_tickets = [ticket for ticket in filtered_tickets if
-                                # ticket.creator_id.id in user_following_ids
-                                ticket.creator_id is not None and ticket.creator_id.id in user_following_ids # kalyptei guest periptwsh opws panw
-                                ]
+            combined_tickets = [
+                ticket for ticket in combined_tickets if
+                ticket.creator_id is not None and ticket.creator_id.id in user_following_ids  # kalyptei guest periptwsh opws panw
+            ]
 
     else:
+        # For non-authenticated users
         following_user_ids = []
         # filtered_tickets = ticket_list  # Show all tickets for guestsa allakse to me to allo apo katw otan
-        filtered_tickets = [ticket for ticket in ticket_list if ticket.stylist_type == 'everyone'] # deikse ola ektos apo afta pou exoun sygekrimeno following
+        combined_tickets = [
+            ticket for ticket in ticket_list if ticket.stylist_type == 'everyone'
+        ]  # Show all except those with specific 'following' type
 
-    # Create a paginator for the filtered tickets
-    paginator = Paginator(filtered_tickets, 20)  # Show 20 tickets per page
+    # Create a paginator for the combined tickets
+    paginator = Paginator(combined_tickets, 20)  # Show 20 tickets per page
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
 
@@ -117,6 +131,7 @@ def studio_tickets(request):
         'following_user_ids': following_user_ids,
     }
     return render(request, 'studio/studio_tickets.html', context)
+
 
 
 
