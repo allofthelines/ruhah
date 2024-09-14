@@ -628,6 +628,7 @@
         <!-- GRIDPICS Section -->
         <div id="gridpics" class="content-section" style="display: none; padding-top: 15px;">
             <div id="contBBBBB">
+                {% comment %}
                 {% for gridpic in user_gridpics %}
                     <div class="contAAAAA" id="gridpic-{{ gridpic.id }}">
                         <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
@@ -637,6 +638,27 @@
                         </form>
                     </div>
                 {% endfor %}
+                {% endcomment %}
+                {% for gridpic in user_gridpics %}
+                    <div class="gridpic">
+                        {% if gridpic.gridpic_temp_active %}
+                            <!-- Display the temporary image with options to accept or reject -->
+                            <img src="{{ gridpic.gridpic_temp_img.url }}" alt="Temporary Try-On Image">
+                            <button onclick="location.href='{% url 'accounts:accept_temp_image' gridpic.id %}'">Accept Try-On</button>
+                            <button onclick="location.href='{% url 'accounts:reject_temp_image' gridpic.id %}'">Reject</button>
+                        {% else %}
+                            <!-- Display the latest tryon image or the original image -->
+                            {% if gridpic.gridpic_tryons.exists %}
+                                <img src="{{ gridpic.gridpic_tryons.latest.url }}" alt="Try-On Image">
+                            {% else %}
+                                <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Original Image">
+                            {% endif %}
+                            <button onclick="location.href='{% url 'accounts:try_on' gridpic.id %}'">Try-On</button>
+                            <button onclick="location.href='{% url 'accounts:remove_gridpic' gridpic.id %}'">Remove</button>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
             </div>
         </div>
 

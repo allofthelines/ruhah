@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block page-header %}
+    Gridpic Try-On
+{% endblock %}
+
+{% block content %}
+
+<div class="success-message">
+    <p>Your try-on request has been submitted. It will take about a minute for the image to be processed.</p>
+    <p>Go to the <a href="{% url 'accounts:profile' %}">gridpics section</a> to see the result once it is ready.</p>
+</div>
+
+
+
+{% endblock %}
