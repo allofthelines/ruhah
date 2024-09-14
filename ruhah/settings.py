@@ -345,6 +345,16 @@ if ENVIRONMENT == 'production':
 
 
 
+# API KOLORS MODEL VIRTUAL TRY-ON
+# API KOLORS MODEL VIRTUAL TRY-ON
+KOLORS_API_KEY = 'your_api_key_here'
+KOLORS_API_SECRET = 'your_api_secret_here'
+KOLORS_API_URL = 'https://kolors-model.api/tryon'  # Example endpoint URL
+
+
+
+
+
 
 
 INVITE_CODE_REQUIRED = True
