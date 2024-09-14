@@ -657,7 +657,7 @@ def tryon_item_search(request, gridpic_id):
             items = items.filter(cat=category)
 
     context = {
-        'gridpic': gridpic,
+        'selected_gridpic': gridpic,
         'items': items,
     }
 
