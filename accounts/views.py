@@ -15,6 +15,7 @@ import json
 from django.urls import reverse
 from django.middleware.csrf import get_token
 from django.utils import timezone
+from django.db.models import Q  # gia to search sto profile_gridpic_try_on
 
 
 
@@ -750,8 +751,6 @@ def delete_all_tryons(request, gridpic_id):
 
 
 @login_required
-from django.db.models import Q  # Make sure this is imported at the top if not already
-
 def profile_gridpic_try_on(request, gridpic_id):
     # Retrieve the selected gridpic object
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
