@@ -679,7 +679,8 @@ def tryon_item_search(request, gridpic_id):
         'items': items,
     }
 
-    return render(request, 'accounts/tryon_item_search.html', context)
+    # Use the existing template for displaying search results
+    return render(request, 'accounts/profile_gridpic_try_on.html', context)  #
 
 
 
