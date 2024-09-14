@@ -750,7 +750,6 @@ def delete_all_tryons(request, gridpic_id):
 
 
 
-@login_required
 def profile_gridpic_try_on(request, gridpic_id):
     # Retrieve the selected gridpic object
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
@@ -759,37 +758,30 @@ def profile_gridpic_try_on(request, gridpic_id):
     if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
         # Show the temporary image if it exists and is active
         selected_gridpic_url = gridpic.gridpic_temp_img.url
-    elif gridpic.gridpic_tryons.exists():
+    elif gridpic.gridpic_tryon_item_id.exists():  # Corrected to use the ManyToManyField
         # Show the latest tryon image if it exists
-        selected_gridpic_url = gridpic.gridpic_tryons.latest('id').url
+        selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
     else:
         # Show the original processed image
         selected_gridpic_url = gridpic.gridpic_processed_img.url
 
-    # Get the search query and category from the request
+    # Example search logic
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
-    search_results = Item.objects.none()  # Initialize an empty queryset
+    items = Item.objects.all()
 
-    # Check if the search form is submitted
-    if 'search' in request.GET:
-        search_results = Item.objects.all()  # Start with all items
+    if search_query:
+        query = Q()
+        for term in search_query.split():
+            query &= Q(name__icontains=term)
+        items = items.filter(query)
 
-        # Filter based on search query
-        if search_query:
-            words = search_query.split()
-            query = Q()
-            for word in words:
-                query &= Q(tags__icontains=word)
-            search_results = search_results.filter(query)
-
-        # Filter based on category
-        if category and category != 'all':
-            search_results = search_results.filter(cat=category)
+    if category and category != 'all':
+        items = items.filter(cat=category)
 
     context = {
         'selected_gridpic_url': selected_gridpic_url,
-        'search_results': search_results,
+        'search_results': items,
         'selected_gridpic': gridpic
     }
 
