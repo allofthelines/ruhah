@@ -540,86 +540,9 @@
 
 
 
-        <!-- Grid Profile Section -->
-<div id="grid" class="content-section" style="display: none; padding-top: 15px;">
-    <div id="contBBBBB">
-        {% for outfit in user.outfit_set.all %}
-            {% if outfit.maker_grid_visibility == 'show' %}
-                <div class="contAAAAA" id="outfit-{{ outfit.id }}">
-                    {% if 'default_img.jpg' not in outfit.portrait.url %}
-                        <img src="{{ outfit.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
-                    {% endif %}
-                    <img src="{{ outfit.image.url }}" alt="Outfit Image" class="image" style="display: {% if 'default_img.jpg' in outfit.portrait.url %}block{% else %}none{% endif %};">
-
-                    <!-- Remove button -->
-                    <form action="{% url 'accounts:remove_outfit' outfit.id %}?next={% url 'accounts:profile' %}#grid" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="link-style">Remove</button>
-                    </form>
-
-                    <!-- Try-On button -->
-                    <button onclick="location.href='{% url 'accounts:profile_gridpic_try_on' outfit.id %}'" class="link-style">Try-On</button>
-                </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-</div>
-
-<style>
-    #contBBBBB {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 columns in desktop */
-        grid-gap: 2px;
-        border: 0px solid black; /* Border around the entire container */
-        margin: 0 0px; /* extra margins on the left and right */
-    }
-
-    .contAAAAA {
-        display: flex;
-        flex-direction: column; /* Image on top, links below */
-        border: 1px solid black; /* Thin borders */
-    }
-
-    .contAAAAA img {
-        width: 100%;
-        height: auto;
-        flex-grow: 1; /* Image takes up the available space */
-    }
-
-    .contAAAAA form {
-        text-align: center;
-        padding: 5px;
-        background: white;
-        border-top: 1px solid black; /* Thin border between image and link */
-        display: block;
-    }
-
-    .contAAAAA button {
-        background: none;
-        border: none;
-        color: black;
-        cursor: pointer;
-        display: block;
-        text-align: center;
-        padding: 5px; /* Match 'Remove' link styling */
-        width: 100%;
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: 400;
-    }
-
-    @media (max-width: 768px) {
-        #contBBBBB {
-            grid-template-columns: 1fr; /* 1 column in mobile */
-        }
-    }
-</style>
 
 
 
-
-
-{% comment %}
         <!-- Add this section for Grid Profile Section -->
         <div id="grid" class="content-section" style="display: none; padding-top: 15px;">
             <div id="contBBBBB">
@@ -692,8 +615,6 @@
 }
 
 </style>
-{% endcomment %}
-
 
 
 
@@ -705,7 +626,6 @@
 
 
         <!-- GRIDPICS Section -->
-        <!-- KAKO DEN EXEI XRHSH NOMIZW - REALLY TO PROHGOUMENO EINAI AFTO POU METRAEI -->
         <div id="gridpics" class="content-section" style="display: none; padding-top: 15px;">
             <div id="contBBBBB">
                 {% for gridpic in user_gridpics %}
@@ -713,7 +633,7 @@
                         <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
                         <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
                             {% csrf_token %}
-                            <button type="submit" class="link-style">Remove</button>
+                            <button type="submit" class="link-style">Remove LOL</button>
                         </form>
                     </div>
                 {% endfor %}
