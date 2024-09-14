@@ -778,6 +778,8 @@ def profile_gridpic_try_on(request, gridpic_id):
         'selected_gridpic': gridpic
     }
 
+    print(f"\n\n\n\n\nSelected GridPic ID: {gridpic.id}\n\n\n\n\n")
+
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
 
 
