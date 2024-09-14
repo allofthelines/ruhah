@@ -648,20 +648,37 @@
                     <div class="contAAAAA" id="gridpic-{{ gridpic.id }}">
                         <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
 
-                        <!-- Remove Button Form -->
-                        <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
-                            {% csrf_token %}
-                            <button type="submit" class="link-style">Remove</button>
-                        </form>
+                        <div class="button-row">
+                            <!-- Remove Button Form -->
+                            <form action="{% url 'accounts:remove_gridpic' gridpic.id %}?next={% url 'accounts:profile' %}#gridpics" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="link-style">Remove</button>
+                            </form>
 
-                        <!-- Try-On Button Form -->
-                        <form action="{% url 'accounts:profile_gridpic_try_on' gridpic.id %}" method="GET">
-                            <button type="submit" class="link-style">Try-On</button>
-                        </form>
+                            <!-- Try-On Button Form -->
+                            <form action="{% url 'accounts:profile_gridpic_try_on' gridpic.id %}" method="GET">
+                                <button type="submit" class="link-style">Try-On</button>
+                            </form>
+                        </div>
+
                     </div>
                 {% endfor %}
             </div>
         </div>
+
+        <style>
+            .button-row {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 5px; /* Optional: Adjust margin between button row and image */
+            }
+
+            .button-row form {
+                margin: 0; /* Remove margin to align buttons properly */
+                padding: 0; /* Remove padding for consistency */
+            }
+
+        </style>
 
 
 
