@@ -14,7 +14,7 @@
     </div>
 
     <!-- Search form (copied from studio_items.html) -->
-    <form method="get" action="{% url 'studio:item_search' %}">
+    <form method="get" action="{% url 'studio:item_search' selected_gridpic.id %}">
         <select name="category">
             <option value="all">All</option>
             <option value="top">Top</option>
