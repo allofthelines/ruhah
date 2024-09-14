@@ -634,6 +634,20 @@ def confirm_email(request, uidb64, token):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import requests
 from django.conf import settings
 
@@ -664,6 +678,9 @@ def call_kolors_api(image1_path, image2_path):
     except Exception as e:
         print(f"Error calling Kolors API: {str(e)}")
         return None
+
+
+
 
 
 
@@ -707,6 +724,25 @@ def perform_try_on(request, gridpic_id, item_id):
         # Handle API error
         messages.error(request, "Failed to process Try-On. Please try again later.")
         return redirect('accounts:profile')
+
+
+from django.shortcuts import get_object_or_404, redirect
+from .models import GridPicUpload
+from django.contrib import messages
+
+
+def delete_all_tryons(request, gridpic_id):
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    # Delete all try-on images associated with this gridpic
+    gridpic.gridpic_tryons.all().delete()
+    gridpic.tryon_times = 0
+    gridpic.save()
+
+    # Optionally, show a message to the user
+    messages.success(request, "All try-ons have been deleted.")
+
+    return redirect('accounts:profile')
 
 
 
