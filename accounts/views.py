@@ -649,6 +649,41 @@ def confirm_email(request, uidb64, token):
 
 
 
+
+
+
+
+
+def tryon_item_search(request, gridpic_id):
+    # Assuming gridpic_id is the ID of the GridPicUpload, not Ticket
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+    search_query = request.GET.get('search_query', '')
+    category = request.GET.get('category', 'all')
+    items = Item.objects.none()
+
+    if 'search' in request.GET:
+        items = Item.objects.all()
+
+        if search_query:
+            words = search_query.split()
+            query = Q()
+            for word in words:
+                query &= Q(tags__icontains=word)
+            items = items.filter(query)
+
+        if category and category != 'all':
+            items = items.filter(cat=category)
+
+    context = {
+        'gridpic': gridpic,
+        'items': items,
+    }
+
+    return render(request, 'accounts/tryon_item_search.html', context)
+
+
+
+
 import requests
 from django.conf import settings
 

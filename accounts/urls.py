@@ -53,4 +53,6 @@ urlpatterns = [
     path('try-on/submitted/', views.profile_try_on_submitted, name='profile_try_on_submitted'),
     path('gridpic/<int:gridpic_id>/delete-all-tryons/', views.delete_all_tryons, name='delete_all_tryons'),
 
+    path('tryon-item-search/<int:gridpic_id>/', views.tryon_item_search, name='tryon_item_search'),
+
 ]

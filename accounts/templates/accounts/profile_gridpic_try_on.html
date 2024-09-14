@@ -14,7 +14,7 @@
     </div>
 
     <!-- Search form (copied from studio_items.html) -->
-    <form method="get" action="{% url 'studio:item_search' selected_gridpic.id %}">
+    <form method="get" action="{% url 'accounts:tryon_item_search' selected_gridpic.id %}">
         <select name="category">
             <option value="all">All</option>
             <option value="top">Top</option>
@@ -27,6 +27,7 @@
         <input type="hidden" name="search" value="1">
         <button type="submit">Search</button>
     </form>
+
 
     <!-- Display search results with Try-On buttons -->
     {% if search_results %}
