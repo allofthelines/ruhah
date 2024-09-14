@@ -766,41 +766,20 @@ def profile_gridpic_try_on(request, gridpic_id):
 
     # Determine which image to show
     if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
-        # Show the temporary image if it exists and is active
         selected_gridpic_url = gridpic.gridpic_temp_img.url
-    elif gridpic.gridpic_tryon_item_id.exists():  # Corrected to use the ManyToManyField
-        # Show the latest tryon image if it exists
+    elif gridpic.gridpic_tryon_item_id.exists():
         selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
     else:
-        # Show the original processed image
         selected_gridpic_url = gridpic.gridpic_processed_img.url
 
-    # Example search logic
-    search_query = request.GET.get('search_query', '')
-    category = request.GET.get('category', 'all')
-
-    # Initialize search results as an empty QuerySet
-    items = Item.objects.none()
-
-    # Only perform search if there is a search query
-    if search_query or category != 'all':
-        items = Item.objects.all()
-        if search_query:
-            query = Q()
-            for term in search_query.split():
-                query &= Q(name__icontains=term)
-            items = items.filter(query)
-
-        if category and category != 'all':
-            items = items.filter(cat=category)
-
+    # Prepare context for rendering
     context = {
         'selected_gridpic_url': selected_gridpic_url,
-        'search_results': items,
         'selected_gridpic': gridpic
     }
 
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
 
 
 @login_required
