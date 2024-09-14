@@ -787,3 +787,9 @@ def reject_temp_image(request, gridpic_id):
         gridpic.save()
 
     return redirect('accounts:profile')
+
+
+from django.shortcuts import render
+
+def profile_try_on_submitted(request):
+    return render(request, 'accounts/profile_try_on_submitted.html')
