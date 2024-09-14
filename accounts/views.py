@@ -746,10 +746,6 @@ def delete_all_tryons(request, gridpic_id):
     return redirect('accounts:profile')
 
 
-
-
-
-
 def profile_gridpic_try_on(request, gridpic_id):
     # Retrieve the selected gridpic object
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
@@ -768,16 +764,21 @@ def profile_gridpic_try_on(request, gridpic_id):
     # Example search logic
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
-    items = Item.objects.all()
 
-    if search_query:
-        query = Q()
-        for term in search_query.split():
-            query &= Q(name__icontains=term)
-        items = items.filter(query)
+    # Initialize search results as an empty QuerySet
+    items = Item.objects.none()
 
-    if category and category != 'all':
-        items = items.filter(cat=category)
+    # Only perform search if there is a search query
+    if search_query or category != 'all':
+        items = Item.objects.all()
+        if search_query:
+            query = Q()
+            for term in search_query.split():
+                query &= Q(name__icontains=term)
+            items = items.filter(query)
+
+        if category and category != 'all':
+            items = items.filter(cat=category)
 
     context = {
         'selected_gridpic_url': selected_gridpic_url,
@@ -786,8 +787,6 @@ def profile_gridpic_try_on(request, gridpic_id):
     }
 
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
-
-
 
 
 @login_required
