@@ -42,9 +42,10 @@
 
     <!-- Navigation Buttons -->
     <div class="button-container">
-        <button onclick="location.href='{% url 'accounts:profile' %}#gridpics'" class="btn btn-secondary">Back to Gridpics</button>
         <button onclick="location.href='{% url 'accounts:delete_all_tryons' selected_gridpic.id %}'" class="btn btn-secondary">Delete All Try-Ons</button>
+        <a href="{% url 'accounts:profile' %}#gridpics" class="btn-link">Back to Gridpics</a>
     </div>
+
 
 </div>
 
@@ -116,6 +117,27 @@
         cursor: pointer;
         text-align: center;
     }
+
+    .button-container {
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        justify-content: center;
+        align-items: center; /* Center-align the buttons */
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .btn-link {
+        background: none;
+        border: none;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        padding: 10px 20px;
+        text-decoration: none; /* Remove underline */
+    }
+
 
     @media (max-width: 768px) {
         #studio-items-all-content {
