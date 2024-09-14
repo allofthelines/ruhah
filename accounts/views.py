@@ -637,33 +637,38 @@ def tryon_item_search(request, gridpic_id):
     # Fetch the GridPicUpload object using gridpic_id from the URL
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
-    print(f"\n\n\n\n\nTO GRIDPIC EINAI: {gridpic}\n\n\n\n\n")
+    print(f"Selected GridPic: {gridpic}")
 
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
-    items = Item.objects.none()
+    search_results = Item.objects.none()  # Use 'search_results' to match the template
+
+    print(f"Search Query: {search_query}, Category: {category}")
 
     if 'search' in request.GET:
-        items = Item.objects.all()
+        search_results = Item.objects.all()
+        print(f"All items count: {search_results.count()}")
 
         if search_query:
             words = search_query.split()
             query = Q()
             for word in words:
                 query &= Q(tags__icontains=word)
-            items = items.filter(query)
+            search_results = search_results.filter(query)
+            print(f"Filtered by search_query count: {search_results.count()}")
 
         if category and category != 'all':
-            items = items.filter(cat=category)
+            search_results = search_results.filter(cat=category)
+            print(f"Filtered by category count: {search_results.count()}")
 
     context = {
-        'selected_gridpic': gridpic, # shmantiko na yparxei me selected. alliws error
-        'gridpic': gridpic,
-        'items': items,
+        'selected_gridpic': gridpic,  # Ensure the gridpic is available in the template
+        'search_results': search_results,  # Pass search_results to the template
     }
 
     # Render the template and display search results
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
 
 
 import requests
