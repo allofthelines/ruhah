@@ -657,7 +657,8 @@ def tryon_item_search(request, gridpic_id):
             items = items.filter(cat=category)
 
     context = {
-        'selected_gridpic': gridpic,
+        'selected_gridpic': gridpic, # shmantiko na yparxei me selected. alliws error
+        'gridpic': gridpic,
         'items': items,
     }
 
