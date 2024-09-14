@@ -638,6 +638,9 @@
                         </form>
                     </div>
                 {% endfor %}
+
+                <button onclick="location.href='{% url 'accounts:remove_gridpic' gridpic.id %}'">Remove</button>
+
                 {% endcomment %}
                 {% for gridpic in user_gridpics %}
                     <div class="gridpic">
@@ -654,7 +657,6 @@
                                 <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Original Image">
                             {% endif %}
                             <button onclick="location.href='{% url 'accounts:try_on' gridpic.id %}'">Try-On</button>
-                            <button onclick="location.href='{% url 'accounts:remove_gridpic' gridpic.id %}'">Remove</button>
                         {% endif %}
                     </div>
                 {% endfor %}
