@@ -49,7 +49,7 @@
 
 <style>
     #studio-items-all-content {
-        width: 90%; /* Changed width to 90% */
+        width: 95%; /* Increased width to reduce left and right margins */
         max-width: 1000px; /* Maximum width for desktop */
         margin: 0 auto; /* Center the entire content */
         text-align: center; /* Center-align text */
@@ -72,9 +72,9 @@
     #contB {
         display: grid;
         grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
-        grid-gap: 10px;
+        grid-gap: 5px; /* Reduced gap between grid items */
         border: 0px solid black;
-        margin: 20px auto; /* Center the grid and add margins */
+        margin: 10px auto; /* Center the grid and reduce margins */
         max-width: 1000px;
     }
 
@@ -118,7 +118,7 @@
 
     @media (max-width: 768px) {
         #studio-items-all-content {
-            width: 90%; /* Full width on mobile */
+            width: 95%; /* Full width on mobile */
         }
         #contB {
             grid-template-columns: repeat(2, 1fr); /* Two columns on mobile */
