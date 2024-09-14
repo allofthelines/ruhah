@@ -713,7 +713,6 @@ def perform_try_on(request, gridpic_id, item_id):
 
 
 
-
 @login_required
 def profile_gridpic_try_on(request, gridpic_id):
     # Retrieve the selected gridpic object
@@ -731,10 +730,15 @@ def profile_gridpic_try_on(request, gridpic_id):
         # Show the original processed image
         selected_gridpic_url = gridpic.gridpic_processed_img.url
 
-    # Example search logic
+    # Corrected search logic to use 'cat' instead of 'category'
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
-    search_results = Item.objects.filter(category=category, name__icontains=search_query)
+
+    # Check if category is 'all' or filter by the actual category
+    if category == 'all':
+        search_results = Item.objects.filter(name__icontains=search_query)
+    else:
+        search_results = Item.objects.filter(cat=category, name__icontains=search_query)
 
     context = {
         'selected_gridpic_url': selected_gridpic_url,
@@ -743,6 +747,7 @@ def profile_gridpic_try_on(request, gridpic_id):
     }
 
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
 
 
 @login_required
