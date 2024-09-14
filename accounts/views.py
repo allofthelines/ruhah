@@ -723,14 +723,15 @@ def profile_gridpic_try_on(request, gridpic_id):
     if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
         # Show the temporary image if it exists and is active
         selected_gridpic_url = gridpic.gridpic_temp_img.url
-    elif gridpic.gridpic_tryons.exists():
-        # Show the latest tryon image if it exists
-        selected_gridpic_url = gridpic.gridpic_tryons.latest('id').url
+    elif gridpic.gridpic_tryon_item_id.exists():  # Corrected field name
+        # Show the latest try-on image if it exists
+        latest_tryon_item = gridpic.gridpic_tryon_item_id.latest('id')  # Use related items to determine latest
+        selected_gridpic_url = latest_tryon_item.image.url  # Assuming 'image' is a field in the Item model
     else:
         # Show the original processed image
         selected_gridpic_url = gridpic.gridpic_processed_img.url
 
-    # Example search logic (this would need to be refined to match your actual search)
+    # Example search logic
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
     search_results = Item.objects.filter(category=category, name__icontains=search_query)
