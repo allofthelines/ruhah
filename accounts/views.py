@@ -639,15 +639,23 @@ def tryon_item_search(request, gridpic_id):
 
     print(f"Selected GridPic: {gridpic}")
 
+    # Determine which image to show
+    if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
+        # Show the temporary image if it exists and is active
+        selected_gridpic_url = gridpic.gridpic_temp_img.url
+    elif gridpic.gridpic_tryon_item_id.exists():
+        # Show the latest tryon image if it exists
+        selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
+    else:
+        # Show the original processed image
+        selected_gridpic_url = gridpic.gridpic_processed_img.url
+
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
-    search_results = Item.objects.none()  # Use 'search_results' to match the template
-
-    print(f"Search Query: {search_query}, Category: {category}")
+    search_results = Item.objects.none()
 
     if 'search' in request.GET:
         search_results = Item.objects.all()
-        print(f"All items count: {search_results.count()}")
 
         if search_query:
             words = search_query.split()
@@ -655,19 +663,19 @@ def tryon_item_search(request, gridpic_id):
             for word in words:
                 query &= Q(tags__icontains=word)
             search_results = search_results.filter(query)
-            print(f"Filtered by search_query count: {search_results.count()}")
 
         if category and category != 'all':
             search_results = search_results.filter(cat=category)
-            print(f"Filtered by category count: {search_results.count()}")
 
     context = {
         'selected_gridpic': gridpic,  # Ensure the gridpic is available in the template
-        'search_results': search_results,  # Pass search_results to the template
+        'selected_gridpic_url': selected_gridpic_url,  # Add the URL for the selected gridpic
+        'search_results': search_results,  # Pass search results to the template
     }
 
     # Render the template and display search results
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
 
 
 
