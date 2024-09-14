@@ -637,6 +637,8 @@ def tryon_item_search(request, gridpic_id):
     # Fetch the GridPicUpload object using gridpic_id from the URL
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
+    print(f"\n\n\n\n\nSelected GridPic ID: {gridpic.id}\n\n\n\n\n")
+
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
     items = Item.objects.none()
@@ -777,8 +779,6 @@ def profile_gridpic_try_on(request, gridpic_id):
         'selected_gridpic_url': selected_gridpic_url,
         'selected_gridpic': gridpic
     }
-
-    print(f"\n\n\n\n\nSelected GridPic ID: {gridpic.id}\n\n\n\n\n")
 
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
 
