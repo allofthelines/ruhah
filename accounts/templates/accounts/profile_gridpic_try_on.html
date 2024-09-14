@@ -14,7 +14,7 @@
     </div>
 
     <!-- Search form (copied from studio_items.html) -->
-    <form method="get" action="{% url 'studio:search_items' %}">
+    <form method="get" action="{% url 'studio:item_search' ticket_id=selected_gridpic.id %}">
         <select name="category">
             <option value="all">All</option>
             <option value="top">Top</option>
@@ -25,7 +25,7 @@
         </select>
         <input type="text" name="search_query" placeholder='"blue" "shirt" "stripes"'>
         <input type="hidden" name="search" value="1">
-        <button type="submit" style="margin-left: 5px;">Search</button>
+        <button type="submit">Search</button>
     </form>
 
     <!-- Display search results with Try-On buttons -->
