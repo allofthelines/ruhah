@@ -633,30 +633,10 @@ def confirm_email(request, uidb64, token):
         return render(request, 'accounts/email_confirmation_failed.html')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def tryon_item_search(request, gridpic_id):
-    # Assuming gridpic_id is the ID of the GridPicUpload, not Ticket
+    # Fetch the GridPicUpload object using gridpic_id from the URL
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
     items = Item.objects.none()
@@ -679,10 +659,8 @@ def tryon_item_search(request, gridpic_id):
         'items': items,
     }
 
-    # Use the existing template for displaying search results
-    return render(request, 'accounts/profile_gridpic_try_on.html', context)  #
-
-
+    # Render the template and display search results
+    return render(request, 'accounts/profile_gridpic_try_on.html', context)
 
 
 import requests
@@ -827,9 +805,6 @@ def profile_gridpic_try_on(request, gridpic_id):
 
 @login_required
 def accept_temp_image(request, gridpic_id):
-    """
-    Handle accepting the temporary "Try-On" image.
-    """
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
     if gridpic.gridpic_temp_active:
@@ -848,9 +823,6 @@ def accept_temp_image(request, gridpic_id):
 
 @login_required
 def reject_temp_image(request, gridpic_id):
-    """
-    Handle rejecting the temporary "Try-On" image.
-    """
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
     if gridpic.gridpic_temp_active:
