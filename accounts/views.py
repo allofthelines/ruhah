@@ -750,6 +750,8 @@ def delete_all_tryons(request, gridpic_id):
 
 
 @login_required
+from django.db.models import Q  # Make sure this is imported at the top if not already
+
 def profile_gridpic_try_on(request, gridpic_id):
     # Retrieve the selected gridpic object
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
@@ -758,23 +760,33 @@ def profile_gridpic_try_on(request, gridpic_id):
     if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
         # Show the temporary image if it exists and is active
         selected_gridpic_url = gridpic.gridpic_temp_img.url
-    elif gridpic.gridpic_tryon_item_id.exists():  # Corrected field name
-        # Show the latest try-on image if it exists
-        latest_tryon_item = gridpic.gridpic_tryon_item_id.latest('id')  # Use related items to determine latest
-        selected_gridpic_url = latest_tryon_item.image.url  # Assuming 'image' is a field in the Item model
+    elif gridpic.gridpic_tryons.exists():
+        # Show the latest tryon image if it exists
+        selected_gridpic_url = gridpic.gridpic_tryons.latest('id').url
     else:
         # Show the original processed image
         selected_gridpic_url = gridpic.gridpic_processed_img.url
 
-    # Corrected search logic to use 'cat' instead of 'category'
+    # Get the search query and category from the request
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
+    search_results = Item.objects.none()  # Initialize an empty queryset
 
-    # Check if category is 'all' or filter by the actual category
-    if category == 'all':
-        search_results = Item.objects.filter(name__icontains=search_query)
-    else:
-        search_results = Item.objects.filter(cat=category, name__icontains=search_query)
+    # Check if the search form is submitted
+    if 'search' in request.GET:
+        search_results = Item.objects.all()  # Start with all items
+
+        # Filter based on search query
+        if search_query:
+            words = search_query.split()
+            query = Q()
+            for word in words:
+                query &= Q(tags__icontains=word)
+            search_results = search_results.filter(query)
+
+        # Filter based on category
+        if category and category != 'all':
+            search_results = search_results.filter(cat=category)
 
     context = {
         'selected_gridpic_url': selected_gridpic_url,
@@ -783,6 +795,7 @@ def profile_gridpic_try_on(request, gridpic_id):
     }
 
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
 
 
 
