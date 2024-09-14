@@ -637,7 +637,7 @@ def tryon_item_search(request, gridpic_id):
     # Fetch the GridPicUpload object using gridpic_id from the URL
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
-    print(f"\n\n\n\n\nSelected GridPic ID: {gridpic.id}\n\n\n\n\n")
+    print(f"\n\n\n\n\nTO GRIDPIC EINAI: {gridpic}\n\n\n\n\n")
 
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
