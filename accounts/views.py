@@ -820,7 +820,7 @@ def perform_try_off(request, gridpic_id):
     gridpic.save()
 
     messages.success(request, "Try-on removed and reverted to original.")
-    return redirect('accounts:profile')
+    return redirect(f"{reverse('accounts:profile')}#gridpics")
 
 
 from django.shortcuts import get_object_or_404, redirect
@@ -867,7 +867,7 @@ def profile_gridpic_try_off(request, gridpic_id):
     gridpic.save()
 
     messages.success(request, "Try-off successful. Reverted to the original gridpic.")
-    return redirect('accounts:profile')
+    return redirect(f"{reverse('accounts:profile')}#gridpics")
 
 """
 ------------------------------
@@ -894,7 +894,8 @@ def accept_try_on(request, gridpic_id):
     gridpic.save()
 
     messages.success(request, "Try-on accepted and saved.")
-    return redirect('accounts:profile')
+    # return redirect('accounts:profile')
+    return redirect(f"{reverse('accounts:profile')}#gridpics")
 
 @login_required
 def reject_try_on(request, gridpic_id):
@@ -913,7 +914,8 @@ def reject_try_on(request, gridpic_id):
     gridpic.save()
 
     messages.success(request, "Try-on rejected and reverted to original.")
-    return redirect('accounts:profile')
+    # return redirect('accounts:profile')
+    return redirect(f"{reverse('accounts:profile')}#gridpics")
 
 
 

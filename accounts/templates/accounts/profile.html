@@ -647,7 +647,7 @@
                 {% for gridpic in user_gridpics %}
                     <div class="contAAAAA" id="gridpic-{{ gridpic.id }}">
                         <img src="{{ gridpic.gridpic_processed_img.url }}" alt="Grid Picture" class="image" style="display: block;">
-        
+
                         {% if gridpic.tryon_state == 'original' %}
                             <!-- Remove and Try-On buttons for 'original' state -->
                             <div class="contLLRR">
@@ -674,6 +674,7 @@
                                     </form>
                                 </div>
                                 <div class="LLRR-button-container">
+                                    <!-- mallon prepei kalytera na phgainei se profile_gridpic_try_off -->
                                     <form action="{% url 'accounts:reject_try_on' gridpic.id %}" method="POST">
                                         {% csrf_token %}
                                         <button type="submit" class="link-style">Reject</button>
