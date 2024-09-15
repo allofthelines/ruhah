@@ -583,6 +583,12 @@ def profile_ask_outfit_details(request, outfit_id):
 
 
 
+
+
+
+
+
+
 def email_change_request(request):
     if request.method == 'POST':
         form = EmailChangeForm(request.POST, instance=request.user)
@@ -631,6 +637,34 @@ def confirm_email(request, uidb64, token):
         return render(request, 'accounts/email_confirmed.html')
     else:
         return render(request, 'accounts/email_confirmation_failed.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def tryon_item_search(request, gridpic_id):
@@ -784,18 +818,6 @@ from .models import GridPicUpload
 from django.contrib import messages
 
 
-def delete_all_tryons(request, gridpic_id):
-    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
-
-    # Delete all try-on images associated with this gridpic
-    gridpic.gridpic_tryons.all().delete()
-    gridpic.tryon_times = 0
-    gridpic.save()
-
-    # Optionally, show a message to the user
-    messages.success(request, "All try-ons have been deleted.")
-
-    return redirect('accounts:profile')
 
 
 def profile_gridpic_try_on(request, gridpic_id):
