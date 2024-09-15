@@ -746,8 +746,13 @@ def call_kolors_api(image1_path, image2_path):
 
 
 
+
+
+
 """
+------------------------------
 PERFORM = TELEFTAIO VHMA
+------------------------------
 """
 import requests
 from django.conf import settings
@@ -815,13 +820,10 @@ from django.shortcuts import get_object_or_404, redirect
 from .models import GridPicUpload
 from django.contrib import messages
 
-
-
-
-
-
 """
+------------------------------
 PROFILE_GRIDPIC = PHGAINEI STHN EPOMENH SELIDA
+------------------------------
 """
 def profile_gridpic_try_on(request, gridpic_id):
     # Retrieve the selected gridpic object
@@ -860,11 +862,10 @@ def profile_gridpic_try_off(request, gridpic_id):
     messages.success(request, "Try-off successful. Reverted to the original gridpic.")
     return redirect('accounts:profile')
 
-
-
-
 """
+------------------------------
 ACCEPT = DEN PHGAINEI POUTHENA APLA KLIKAREIS STO PROFILE.HTML KAI EPIKYRWNEI H OXI
+------------------------------
 """
 @login_required
 def accept_try_on(request, gridpic_id):
