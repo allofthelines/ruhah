@@ -839,6 +839,27 @@ def profile_gridpic_try_on(request, gridpic_id):
 
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
 
+def profile_gridpic_try_off(request, gridpic_id):
+    gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
+
+    # Ensure the gridpic is in the 'virtual' state before allowing 'try-off'
+    if gridpic.tryon_state != 'virtual':
+        messages.error(request, "Cannot perform try-off as the gridpic is not in the 'virtual' state.")
+        return redirect('accounts:profile')
+
+    # Perform the 'try-off' by reverting the gridpic to its original state
+    gridpic.tryon_state = 'original'
+    if gridpic.gridpic_tryon_img:
+        gridpic.gridpic_tryon_img.delete(save=False)  # Delete the virtual try-on image
+    gridpic.gridpic_tryon_item_id.clear()  # Clear any associated items
+    gridpic.save()
+
+    messages.success(request, "Try-off successful. Reverted to the original gridpic.")
+    return redirect('accounts:profile')
+
+
+
+
 
 
 
