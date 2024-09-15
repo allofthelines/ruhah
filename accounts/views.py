@@ -824,21 +824,21 @@ def profile_gridpic_try_on(request, gridpic_id):
     # Retrieve the selected gridpic object
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
-    # Determine which image to show
-    if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
+    # Determine which image to show based on the tryon_state
+    if gridpic.tryon_state == 'temp' and gridpic.gridpic_temp_img:
         selected_gridpic_url = gridpic.gridpic_temp_img.url
-    elif gridpic.gridpic_tryon_item_id.exists():
-        selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
+    elif gridpic.tryon_state == 'virtual' and gridpic.gridpic_tryon_img:
+        selected_gridpic_url = gridpic.gridpic_tryon_img.url
     else:
         selected_gridpic_url = gridpic.gridpic_processed_img.url
 
-    # Prepare context for rendering
     context = {
         'selected_gridpic_url': selected_gridpic_url,
-        'selected_gridpic': gridpic
+        'selected_gridpic': gridpic,
     }
 
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
 
 
 
