@@ -671,44 +671,40 @@ def tryon_item_search(request, gridpic_id):
     # Fetch the GridPicUpload object using gridpic_id from the URL
     gridpic = get_object_or_404(GridPicUpload, id=gridpic_id, uploader_id=request.user)
 
-    print(f"Selected GridPic: {gridpic}")
-
-    # Determine which image to show
-    if gridpic.gridpic_temp_active and gridpic.gridpic_temp_img:
-        # Show the temporary image if it exists and is active
+    # Determine which image to show based on the tryon_state
+    if gridpic.tryon_state == 'temp' and gridpic.gridpic_temp_img:
         selected_gridpic_url = gridpic.gridpic_temp_img.url
-    elif gridpic.gridpic_tryon_item_id.exists():
-        # Show the latest tryon image if it exists
-        selected_gridpic_url = gridpic.gridpic_tryon_item_id.latest('id').image.url
+    elif gridpic.tryon_state == 'virtual' and gridpic.gridpic_tryon_img:
+        selected_gridpic_url = gridpic.gridpic_tryon_img.url
     else:
-        # Show the original processed image
         selected_gridpic_url = gridpic.gridpic_processed_img.url
 
     search_query = request.GET.get('search_query', '')
     category = request.GET.get('category', 'all')
-    search_results = Item.objects.none()
+    items = Item.objects.none()
 
     if 'search' in request.GET:
-        search_results = Item.objects.all()
+        items = Item.objects.all()
 
         if search_query:
             words = search_query.split()
             query = Q()
             for word in words:
                 query &= Q(tags__icontains=word)
-            search_results = search_results.filter(query)
+            items = items.filter(query)
 
         if category and category != 'all':
-            search_results = search_results.filter(cat=category)
+            items = items.filter(cat=category)
 
     context = {
-        'selected_gridpic': gridpic,  # Ensure the gridpic is available in the template
-        'selected_gridpic_url': selected_gridpic_url,  # Add the URL for the selected gridpic
-        'search_results': search_results,  # Pass search results to the template
+        'selected_gridpic_url': selected_gridpic_url,  # Pass the selected image URL
+        'selected_gridpic': gridpic,
+        'items': items,
     }
 
     # Render the template and display search results
     return render(request, 'accounts/profile_gridpic_try_on.html', context)
+
 
 
 
