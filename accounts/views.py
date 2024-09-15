@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, UserProfileForm, CustomerForm, PortraitUploadForm, ProfileSettingsForm, EmailChangeForm, GridPicUploadForm
 import json
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 from django.middleware.csrf import get_token
 from django.utils import timezone
 from django.db.models import Q  # gia to search sto profile_gridpic_try_on
@@ -915,7 +916,7 @@ def reject_try_on(request, gridpic_id):
 
     messages.success(request, "Try-on rejected and reverted to original.")
     # return redirect('accounts:profile')
-    return redirect(f"{reverse('accounts:profile')}#gridpics")
+    return HttpResponseRedirect(f"{reverse('accounts:profile')}#gridpics")
 
 
 
