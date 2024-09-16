@@ -665,7 +665,10 @@ def confirm_email(request, uidb64, token):
 
 
 
-
+"""
+ENERGO ALLA TOXW VGALEI TRY-ON PART
+VALE/VGALE KRYVONTAS TO KOUMPI TRY-ON STO PROFILE.HTML
+"""
 
 
 def tryon_item_search(request, gridpic_id):
