@@ -185,7 +185,7 @@ function toggleFollowUnfollow(username, isFollowing) {
             {% for grid_item in grid_items %}
                 {% if grid_item.type == 'outfit' and grid_item.item.maker_grid_visibility == 'show' %}
                 <div class="outfit-item" id="outfit-{{ grid_item.item.id }}"
-                     <!--ondblclick="handleOutfitClick({{ grid_item.item.id }})" -->
+                     {% comment %}ondblclick="handleOutfitClick({{ grid_item.item.id }})"{% endcomment %}
                      onclick="handleOutfitClick({{ grid_item.item.id }})">
                     {% if 'default_img.jpg' not in grid_item.item.portrait.url %}
                         <img src="{{ grid_item.item.portrait.url }}" alt="Outfit Portrait" class="portrait" style="display: block;">
