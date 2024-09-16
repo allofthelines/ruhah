@@ -251,9 +251,9 @@ function toggleFollowUnfollow(username, isFollowing) {
     function handleOutfitClick(outfitId) {
         if (clickTimeout) {
             // If there's a timeout already set, it's a double-click
-            clearTimeout(clickTimeout); // Clear the timeout to prevent single click action
-            clickTimeout = null; // Reset the timeout variable
-            likeOutfit(outfitId); // Trigger like function on double-click
+            clearTimeout(clickTimeout);
+            clickTimeout = null;
+            likeOutfit(outfitId);
         } else {
             // If no timeout, set a timeout for single-click handling
             clickTimeout = setTimeout(function () {
