@@ -259,7 +259,7 @@ function toggleFollowUnfollow(username, isFollowing) {
             clickTimeout = setTimeout(function () {
                 window.location.href = `{% url 'accounts:profile_grid_outfit_details' 0 %}`.replace('0', outfitId);
                 clickTimeout = null; // Reset the timeout variable
-            }, 1000); // 1-second delay for detecting double-click
+            }, 2000); // 1-second delay for detecting double-click
         }
     }
 
