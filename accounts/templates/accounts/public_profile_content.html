@@ -250,12 +250,12 @@ function toggleFollowUnfollow(username, isFollowing) {
 
     function handleOutfitClick(outfitId) {
         if (clickTimeout) {
-            // If there's a timeout already set, it's a double-click
+            // double click
             clearTimeout(clickTimeout);
             clickTimeout = null;
             likeOutfit(outfitId);
         } else {
-            // If no timeout, set a timeout for single-click handling
+            // single click
             clickTimeout = setTimeout(function () {
                 window.location.href = `{% url 'accounts:profile_grid_outfit_details' 0 %}`.replace('0', outfitId);
                 clickTimeout = null; // Reset the timeout variable
