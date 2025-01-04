@@ -1,3 +1,10 @@
+## IMPORTANT
+**master/localitemids.cv** DO NOT DELETE + KEEP
+<br>
+**master/tree.cv** OPTIONAL + KALO GIA DEBUG
+<br>
+**master/dbschemaoutput.csv** OPTIONAL + KALO GIA DEBUG
+
 ## Scripts
 
 ###STUDIO APP

@@ -229,7 +229,7 @@ EMAIL_HOST_PASSWORD = 'gcxtfsvznyycqowj'
 DEFAULT_FROM_EMAIL = 'fumioxyz1@gmail.com'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.privateemail.com'
+EMAIL_HOST = 'mail.privateemail.com' #ths namecheap
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'contact@ruhah.com'
