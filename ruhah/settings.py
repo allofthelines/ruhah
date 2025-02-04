@@ -45,8 +45,6 @@ else:
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'fumio.xyz',
-    'www.fumio.xyz',
     'ruhah.com',
     'www.ruhah.com',
     'fumio-c90be99ba1a3.herokuapp.com'
@@ -55,8 +53,6 @@ ALLOWED_HOSTS = [
 # IMPORTANT GIA STRIPE WEBHOOK
 CSRF_TRUSTED_ORIGINS = [
     'https://sawfly-resolved-chimp.ngrok-free.app',
-    'https://fumio.xyz',
-    'https://www.fumio.xyz',
     'https://ruhah.com',
     'https://www.ruhah.com'
 ]
