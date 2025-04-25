@@ -216,11 +216,9 @@ class PortraitUpload(models.Model):
     def __str__(self):
         return f"{self.wearer_id.username}'s portrait upload"
 
+# DOWNGRADEHEROKU 4
+# from studio.models import Item  # Make sure this import is present
 
-from studio.models import Item  # Make sure this import is present
-from PIL import Image
-from io import BytesIO
-from django.core.files.base import ContentFile
 
 class GridPicUpload(models.Model):
     DELETED_BY_UPLOADER_CHOICES = [
@@ -228,6 +226,8 @@ class GridPicUpload(models.Model):
         ('yes', 'yes'),
     ]
 
+# DOWNGRADEHEROKU 4
+""""
     gridpic_img = models.ImageField(upload_to='gridpicuploads/')
     gridpic_processed_img = models.ImageField(upload_to='gridpicuploads/processed/', blank=True, null=True)
     uploader_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -235,59 +235,11 @@ class GridPicUpload(models.Model):
     deleted_by_uploader = models.CharField(max_length=10, choices=DELETED_BY_UPLOADER_CHOICES, default='no')
     timedate_deleted_by_uploader = models.DateTimeField(null=True, blank=True)
 
-
-    gridpic_temp_img = models.ImageField(upload_to='gridpicuploads/processed/temps/', blank=True, null=True)
-    gridpic_temp_active = models.BooleanField(default=False)
-    gridpic_tryon_item_id = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True)
-    gridpic_tryon_item = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True)
-    tryon_items = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f"GridPic {self.id} uploaded by {self.uploader_id}"
-
     def save(self, *args, **kwargs):
         if not self.gridpic_processed_img:
             self.process_image()
         super().save(*args, **kwargs)
-
-    def process_image(self):
-        # Open the image
-        img = Image.open(self.gridpic_img)
-
-        # Convert non-RGB images to RGB
-        if img.mode not in ('RGB', 'L'):
-            img = img.convert('RGB')
-
-        width, height = img.size
-
-        if width > height:
-            # Horizontal image
-            left = (width - height) / 2
-            top = 0
-            right = (width + height) / 2
-            bottom = height
-        else:
-            # Vertical image
-            left = 0
-            top = (height - width) / 2
-            right = width
-            bottom = (height + width) / 2
-
-        # Crop and resize the image
-        img = img.crop((left, top, right, bottom))
-        img = img.resize((600, 600), Image.ANTIALIAS)
-
-        # Save the processed image to BytesIO buffer
-        output = BytesIO()
-        img.save(output, format='JPEG', quality=85)
-        output.seek(0)
-
-        # Save the image to the gridpic_processed_img field
-        self.gridpic_processed_img.save(
-            f"{self.gridpic_img.name.split('/')[-1].split('.')[0]}_processed.jpg",
-            ContentFile(output.read()),
-            save=False
-        )
+""""
 
     """
     def process_image(self):
