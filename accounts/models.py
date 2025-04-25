@@ -229,7 +229,7 @@ class GridPicUpload(models.Model):
     ]
 
 # DOWNGRADEHEROKU 4
-""""
+"""
     gridpic_img = models.ImageField(upload_to='gridpicuploads/')
     gridpic_processed_img = models.ImageField(upload_to='gridpicuploads/processed/', blank=True, null=True)
     uploader_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -241,7 +241,7 @@ class GridPicUpload(models.Model):
         if not self.gridpic_processed_img:
             self.process_image()
         super().save(*args, **kwargs)
-""""
+"""
 
     """
     def process_image(self):
