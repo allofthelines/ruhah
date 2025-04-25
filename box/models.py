@@ -23,7 +23,7 @@ class Ticket(models.Model):
     # style1 = models.CharField(max_length=100)
     style1 = models.ForeignKey('studio.Style', on_delete=models.SET_NULL, null=True, related_name='style1_tickets',blank=True)
     # DOWNGRADEHEROKU 6/10 TO EGRAPSA TO AKRIVWS APO KATW STYLIST_TYPE OPOTE OTAN PHGAINEIS PISW SVHSTO
-    stylist_type = models.CharField(max_length=25, choices=('everyone', 'Everyone'), ('following', 'following'),
+    stylist_type = models.CharField(max_length=25, choices=[('everyone', 'Everyone'), ('following', 'following')],
                                     default='everyone', blank=True, null=True)
     # DOWNGRADEHEROKU 6/10
     # stylist_type = models.CharField(max_length=25, choices=STYLIST_TYPE_CHOICES, default='everyone', blank=True, null=True)
