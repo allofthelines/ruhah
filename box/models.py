@@ -14,11 +14,11 @@ from django.conf import settings
 class Ticket(models.Model):
 
     # DOWNGRADEHEROKU 6/10
-    """STYLIST_TYPE_CHOICES = [
+    STYLIST_TYPE_CHOICES = [
         ('everyone', 'Everyone'),
         ('following', 'Following'),
         ('private', 'Private'),
-    ]"""
+    ]
 
     # style1 = models.CharField(max_length=100)
     style1 = models.ForeignKey('studio.Style', on_delete=models.SET_NULL, null=True, related_name='style1_tickets',blank=True)
@@ -26,9 +26,9 @@ class Ticket(models.Model):
     stylist_type = models.CharField(max_length=25, choices=[('everyone', 'Everyone'), ('following', 'following')],
                                     default='everyone', blank=True, null=True)
     # DOWNGRADEHEROKU 6/10
-    # stylist_type = models.CharField(max_length=25, choices=STYLIST_TYPE_CHOICES, default='everyone', blank=True, null=True)
+    stylist_type = models.CharField(max_length=25, choices=STYLIST_TYPE_CHOICES, default='everyone', blank=True, null=True)
     # DOWNGRADEHEROKU 5/10
-    # private_stylist = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='private_stylist_tickets')
+    private_stylist = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='private_stylist_tickets')
     style2 = models.ForeignKey('studio.Style', on_delete=models.SET_NULL, null=True, related_name='style2_tickets', blank=True)
     occasion = models.CharField(max_length=100, null=True, blank=True)
     condition = models.CharField(max_length=100, null=True, blank=True)

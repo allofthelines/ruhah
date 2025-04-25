@@ -34,10 +34,10 @@ class CustomUser(AbstractUser):
     ]
 
     # DOWNGRADEHEROKU 7/10
-    """ACCEPT_PRIVATE_ASKS_CHOICES = [
+    ACCEPT_PRIVATE_ASKS_CHOICES = [
         ('yes', 'Yes'),
         ('no', 'No'),
-    ]"""
+    ]
 
     # delete these
     is_stylist = models.CharField(max_length=10, choices=[('yes', 'Yes'), ('no', 'No')], default='no')
@@ -61,8 +61,8 @@ class CustomUser(AbstractUser):
     studio_styles = models.ManyToManyField('studio.Style', blank=True, related_name='users_with_studio_styles')
     studio_visibility = models.CharField(max_length=15, choices=STUDIO_VISIBILITY_CHOICES, default='discover')
     # DOWNGRADEHEROKU 7/10 ta dyo apo katw ta esvhsa opote ksanavalta
-    #accept_private_asks = models.CharField(max_length=3, choices=ACCEPT_PRIVATE_ASKS_CHOICES, default='yes',help_text="Indicates if the user accepts private asks.")
-    #private_ask_price = models.IntegerField(default=0,help_text="The price in credits for a private ask.")
+    accept_private_asks = models.CharField(max_length=3, choices=ACCEPT_PRIVATE_ASKS_CHOICES, default='yes',help_text="Indicates if the user accepts private asks.", null=True)
+    private_ask_price = models.IntegerField(default=0,help_text="The price in credits for a private ask.", null=True)
 
     followers_list = models.ManyToManyField(
         'self',
@@ -219,8 +219,11 @@ class PortraitUpload(models.Model):
         return f"{self.wearer_id.username}'s portrait upload"
 
 # DOWNGRADEHEROKU 4
-# from studio.models import Item  # Make sure this import is present
+from studio.models import Item  # Make sure this import is present
 
+from PIL import Image
+from io import BytesIO
+from django.code.files.base import ContentFile
 
 class GridPicUpload(models.Model):
     DELETED_BY_UPLOADER_CHOICES = [
@@ -228,22 +231,35 @@ class GridPicUpload(models.Model):
         ('yes', 'yes'),
     ]
 
-# DOWNGRADEHEROKU 4
-"""
-    gridpic_img = models.ImageField(upload_to='gridpicuploads/')
+    TRYON_STATE_CHOICES = [
+        ('original', 'Original'),
+        ('temp', 'Temporary'),
+        ('virtual', 'Virtual'),
+    ]
+
+# DOWNGRADEHEROKU 4 ta 2 block apo katw. ta ksanaevala giati xreiazontai oi orismoi
+
+    # DOWNGRADEHEROKU gridpicimg, uploaderid, timedateuploaded, deletedbyuplaoder,timedatedeletedbyuplaoder EVALA EXTRA NULL TRUE VGALTO META
+    gridpic_tryon_img = models.ImageField(upload_to='gridpicuploads/processed/tryons/', blank=True, null=True)
+    gridpic_img = models.ImageField(upload_to='gridpicuploads/', null=True)
     gridpic_processed_img = models.ImageField(upload_to='gridpicuploads/processed/', blank=True, null=True)
-    uploader_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    timedate_uploaded = models.DateTimeField(auto_now_add=True)
-    deleted_by_uploader = models.CharField(max_length=10, choices=DELETED_BY_UPLOADER_CHOICES, default='no')
-    timedate_deleted_by_uploader = models.DateTimeField(null=True, blank=True)
+    uploader_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    timedate_uploaded = models.DateTimeField(auto_now_add=True, null=True)
+    deleted_by_uploader = models.CharField(max_length=10, choices=DELETED_BY_UPLOADER_CHOICES, default='no', null=True)
+    timedate_deleted_by_uploader = models.DateTimeField(null=True, blank=True, null=True)
+    gridpic_tryon_item = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True)
+    gridpic_tryon_item_id = models.ManyToManyField(Items, blank=True, null=True)
+    tryon_state = models.Charfield(max_length=10, choices=TRYON_STATE_CHOICES, default='original', null=True)
+    tryon_times = models.IntegerField(default=0, null=True)
+    gridpic_temp_img =
 
     def save(self, *args, **kwargs):
         if not self.gridpic_processed_img:
             self.process_image()
         super().save(*args, **kwargs)
-"""
 
-"""
+
+    # DOWNGRADEHEROKU
     def process_image(self):
         img = Image.open(self.gridpic_img)
 
@@ -278,7 +294,7 @@ class GridPicUpload(models.Model):
             ContentFile(output.read()),
             save=False
         )
-"""
+
 
 
 
