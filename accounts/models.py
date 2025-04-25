@@ -247,8 +247,10 @@ class GridPicUpload(models.Model):
     timedate_uploaded = models.DateTimeField(auto_now_add=True, null=True)
     deleted_by_uploader = models.CharField(max_length=10, choices=DELETED_BY_UPLOADER_CHOICES, default='no', null=True)
     timedate_deleted_by_uploader = models.DateTimeField(null=True, blank=True)
-    gridpic_tryon_item = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True)
-    gridpic_tryon_item_id = models.ManyToManyField(Item, blank=True, null=True)
+
+    gridpic_tryon_item = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True, related_name='gridpic_foreignkey_links')
+    gridpic_tryon_item_id = models.ManyToManyField(Item, blank=True, related_name='gridpic_m2m_links')
+
     tryon_state = models.CharField(max_length=10, choices=TRYON_STATE_CHOICES, default='original', null=True)
     tryon_times = models.IntegerField(default=0, null=True)
     gridpic_temp_img = models.ImageField(upload_to='gridpicuploads/processed/tryons/', blank=True, null=True)
