@@ -251,7 +251,7 @@ class GridPicUpload(models.Model):
     gridpic_tryon_item_id = models.ManyToManyField(Items, blank=True, null=True)
     tryon_state = models.Charfield(max_length=10, choices=TRYON_STATE_CHOICES, default='original', null=True)
     tryon_times = models.IntegerField(default=0, null=True)
-    gridpic_temp_img =
+    gridpic_temp_img = models.ImageField(upload_to='gridpicuploads/processed/tryons/', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.gridpic_processed_img:
