@@ -228,12 +228,6 @@ class GridPicUpload(models.Model):
         ('yes', 'yes'),
     ]
 
-    TRYON_STATE_CHOICES = [
-        ('original', 'Original'),
-        ('temp', 'Temporary'),
-        ('virtual', 'Virtual'),
-    ]
-
     gridpic_img = models.ImageField(upload_to='gridpicuploads/')
     gridpic_processed_img = models.ImageField(upload_to='gridpicuploads/processed/', blank=True, null=True)
     uploader_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -241,11 +235,12 @@ class GridPicUpload(models.Model):
     deleted_by_uploader = models.CharField(max_length=10, choices=DELETED_BY_UPLOADER_CHOICES, default='no')
     timedate_deleted_by_uploader = models.DateTimeField(null=True, blank=True)
 
-    gridpic_tryon_img = models.ImageField(upload_to='gridpicuploads/processed/tryons/', blank=True, null=True)
+
     gridpic_temp_img = models.ImageField(upload_to='gridpicuploads/processed/temps/', blank=True, null=True)
+    gridpic_temp_active = models.BooleanField(default=False)
     gridpic_tryon_item_id = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True)
     gridpic_tryon_item = models.ForeignKey(Item, on_delete=models.SET_NULL, blank=True, null=True)
-    tryon_state = models.CharField(max_length=10, choices=TRYON_STATE_CHOICES, default='original')
+    tryon_items = models.IntegerField(default=0)
 
     def __str__(self):
         return f"GridPic {self.id} uploaded by {self.uploader_id}"
