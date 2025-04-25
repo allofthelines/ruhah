@@ -71,6 +71,12 @@ class EcommerceStore(models.Model):
         ('woocommerce', 'WooCommerce'),
         ('magento', 'Magento'),
         ('squarespace', 'Squarespace'),
+
+        # DOWNGRADEHEROKU 8 TA EVALA OPOTE SVHSTA OTAN GYRIZEIS
+        ('wix', 'Wix'),
+        ('prestashop', 'prestashop'),
+        ('weebly', 'weebly'),
+        ('bigcartel', 'BIGCARTER'),
     ]
 
     # address
