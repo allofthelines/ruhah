@@ -223,7 +223,7 @@ from studio.models import Item  # Make sure this import is present
 
 from PIL import Image
 from io import BytesIO
-from django.code.files.base import ContentFile
+from django.core.files.base import ContentFile
 
 class GridPicUpload(models.Model):
     DELETED_BY_UPLOADER_CHOICES = [
