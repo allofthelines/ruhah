@@ -243,7 +243,7 @@ class GridPicUpload(models.Model):
         super().save(*args, **kwargs)
 """
 
-    """
+"""
     def process_image(self):
         img = Image.open(self.gridpic_img)
 
@@ -278,7 +278,7 @@ class GridPicUpload(models.Model):
             ContentFile(output.read()),
             save=False
         )
-    """
+"""
 
 
 
