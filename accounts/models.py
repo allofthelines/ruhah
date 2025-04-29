@@ -255,6 +255,12 @@ class GridPicUpload(models.Model):
     tryon_times = models.IntegerField(default=0, null=True)
     gridpic_temp_img = models.ImageField(upload_to='gridpicuploads/processed/tryons/', blank=True, null=True)
 
+    gridpic_temp_img = models.ImageField(upload_to='gridpicuploads/processed/temps/', blank=True, null=True)
+    gridpic_temp_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"GridPic {self.id} uploaded by {self.uploader_id}"
+
     def save(self, *args, **kwargs):
         if not self.gridpic_processed_img:
             self.process_image()
