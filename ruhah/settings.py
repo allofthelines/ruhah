@@ -49,7 +49,7 @@ ALLOWED_HOSTS = [
     'www.ruhah.com',
     'fumio-c90be99ba1a3.herokuapp.com',
     'ruhah-b38eab8aff15.herokuapp.com',
-    'ruhah-fc7fad379e67.herokuapp.com'
+    'ruhah-fc7fad379e67.herokuapp.com/'
 ]
 
 # IMPORTANT GIA STRIPE WEBHOOK
@@ -119,12 +119,7 @@ print(f"Environment: {ENVIRONMENT}")
 
 if ENVIRONMENT == 'production':
     DATABASES = {
-        'default': dj_database_url.config(
-            # default=config('DATABASE_URL')
-            env='DATABASE_URL',  # Explicitly use this var
-            conn_max_age=600,
-            ssl_require=True
-        )
+        'default': dj_database_url.config(default=config('DATABASE_URL'))
     }
 else:
     DATABASES = {
