@@ -118,7 +118,12 @@ print(f"Environment: {ENVIRONMENT}")
 
 if ENVIRONMENT == 'production':
     DATABASES = {
-        'default': dj_database_url.config(default=config('DATABASE_URL'))
+        'default': dj_database_url.config(
+            # default=config('DATABASE_URL')
+            env='DATABASE_URL',  # Explicitly use this var
+            conn_max_age=600,
+            ssl_require=True
+        )
     }
 else:
     DATABASES = {
