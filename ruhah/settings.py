@@ -48,7 +48,8 @@ ALLOWED_HOSTS = [
     'ruhah.com',
     'www.ruhah.com',
     'fumio-c90be99ba1a3.herokuapp.com',
-    'ruhah-b38eab8aff15.herokuapp.com'
+    'ruhah-b38eab8aff15.herokuapp.com',
+    'ruhah-fc7fad379e67.herokuapp.com'
 ]
 
 # IMPORTANT GIA STRIPE WEBHOOK
